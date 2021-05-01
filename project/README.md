@@ -1,5 +1,3 @@
-1. pip install virtualenv
-2. virtualenv env
-3. pip install -r requirements
-4. export FLASK_APP=project
-5. flask run
+1. pip3 install -r requirements.txt
+2. export FLASK_APP=project
+3. flask run
