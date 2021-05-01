@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/jpg" href="vendor/images/favicon.png"/>
+    <title>IMSS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <a id="signIn" href="{{ url_for('auth.login') }}" class="nav-link underlineHover buttonInactive" role="tab" data-bs-toggle="tab">
+            Sign In </a>
+        <a id="signUp" class="nav-link underlineHover buttonActive" role="tab" data-bs-toggle="tab">
+            Sign Up </a>
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="{{ url_for('static', filename='img/iyte-logo.png') }}" id="icon" alt="User Icon"/>
+        </div>
+
+        <div id="signUpTab" role="tabpanel" class="col-lg-9  tab-pane activer" id="signupPage">
+            <!-- Signup Form -->
+            <form method="POST" action="/signup">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ messages[0]}}
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <input type="email" id="login" class="fadeIn second" name="email" placeholder="School e-mail"
+                       pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.">
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
+                <input type="password" id="password_check" class="fadeIn third" name="password_check" placeholder="Repeat password">
+
+
+                <input onclick="" type="submit" class="fadeIn fourth" value="Sign Up">
+            </form>
+        </div>
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/jpg" href="vendor/images/favicon.png"/>
+    <title>IMSS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <a id="signIn" class="nav-link underlineHover buttonActive"  role="tab" data-bs-toggle="tab">
+       Sign In </a>
+      <a id="signUp" href="{{ url_for('auth.signup') }}" class="nav-link underlineHover buttonInactive"  role="tab" data-bs-toggle="tab">
+      Sign Up </a>
+
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="{{ url_for('static', filename='img/iyte-logo.png') }}" id="icon" alt="User Icon" />
+      </div>
+<div id="signInTab" role="tabpanel" class="col-lg-9  tab-pane show activer" id="loginPage">
+      <!-- Login Form -->
+
+
+      <form method="POST" action="/login">
+          {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            {{messages[0]}}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+
+        <input type="email" id="login" class="fadeIn second" name="email" placeholder="e-mail" pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.">
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+          <div class="field">
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Remember me
+                </label>
+            </div>
+        <input  type="submit" class="fadeIn fourth" value="Log In">
+
+      </form>
+</div>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+
+    </div>
+  </div>
+<script src="main.js"></script>
+  </body>
+</html>
