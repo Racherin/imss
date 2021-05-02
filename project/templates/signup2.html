@@ -31,17 +31,29 @@
                 {% endif %}
                 {% endwith %}
 
-                <input type="email" id="login" class="fadeIn second" name="email" placeholder="School e-mail"
-                       pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.">
-                <input type="text" id="name" class="fadeIn third" name="first_name" placeholder="First Name">
-                <input type="text" id="lastname" class="fadeIn third" name="last_name" placeholder="Last Name">
+                <input type="email" id="login" class="fadeIn second" name="login" placeholder="School e-mail" pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:.">
+              <input type="text" id="text" class="fadeIn third" name="login" placeholder="School ID">
+              <input type="text" id="text" class="fadeIn third" name="login" placeholder="Specialization">
+              <input type="text" id="text" class="fadeIn third" name="login" placeholder="Office">
 
-                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
-                <input type="password" id="password_check" class="fadeIn third" name="password_check" placeholder="Repeat password">
+        <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+        <div>
+        <div class="fadeIn fourth custom-select row6">
+            <select name="usertype" class="my-2">
+          <option value="student">Department</option>
+          <option value="advisor">Computer Engineering</option>
+          <option value="student">Chemistry </option>
+          <option value="student">Chemical Engineering </option>
+          <option value="student">Mathematics </option>
+      </select>
+            </div>
+        <div class="fadeIn fourth custom-select row6">
             <select name="usertype" class="my-2">
           <option value="student">Student</option>
           <option value="advisor">Advisor</option>
+          <option value="student">Student</option>
       </select>
+            </div></div>
 
 
                 <input onclick="" type="submit" class="fadeIn fourth" value="Sign Up">
@@ -54,6 +66,6 @@
 
     </div>
 </div>
-<script src="main.js"></script>
+<script src="project/static/js/main.js"></script>
 </body>
 </html>
