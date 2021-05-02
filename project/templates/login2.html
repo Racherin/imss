@@ -11,7 +11,7 @@
     <div id="formContent">
       <!-- Tabs Titles -->
       <a id="signIn" class="nav-link underlineHover buttonActive"  role="tab" data-bs-toggle="tab">
-       Sign In </a>
+       LOGIN </a>
       <a id="signUp" href="{{ url_for('auth.signup') }}" class="nav-link underlineHover buttonInactive"  role="tab" data-bs-toggle="tab">
       Sign Up </a>
 
@@ -33,8 +33,15 @@
         {% endwith %}
 
 
+      if user.type == advisor
+
+
         <input type="email" id="login" class="fadeIn second" name="email" placeholder="e-mail" pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.">
         <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+            <select name="usertype" class="my-2">
+          <option value="student">Student</option>
+          <option value="advisor">Advisor</option>
+            </select>
           <div class="field">
                 <label class="checkbox">
                     <input type="checkbox">

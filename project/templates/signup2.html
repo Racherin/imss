@@ -11,7 +11,7 @@
     <div id="formContent">
         <!-- Tabs Titles -->
         <a id="signIn" href="{{ url_for('auth.login') }}" class="nav-link underlineHover buttonInactive" role="tab" data-bs-toggle="tab">
-            Sign In </a>
+            LOGIN </a>
         <a id="signUp" class="nav-link underlineHover buttonActive" role="tab" data-bs-toggle="tab">
             Sign Up </a>
 
@@ -35,6 +35,10 @@
                        pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
                 <input type="password" id="password_check" class="fadeIn third" name="password_check" placeholder="Repeat password">
+            <select name="usertype" class="my-2">
+          <option value="student">Student</option>
+          <option value="advisor">Advisor</option>
+      </select>
 
 
                 <input onclick="" type="submit" class="fadeIn fourth" value="Sign Up">

@@ -8,9 +8,9 @@ class Advisor(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    first_name = db.Column(db.String(100), nullable=False)
+    first_name = db.Column(db.String(100))
     middle_name = db.Column(db.String(100))
-    last_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100))
     dept_id = db.Column(db.Integer)  # Dept table eklenecek
     nationality = db.Column(db.String(200))
     address = db.Column(db.String(2000))
