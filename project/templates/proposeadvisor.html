@@ -1,0 +1,175 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <h3 class="text-dark mb-4">Advisors</h3>
+        <div class="card shadow">
+            <div class="card-header py-3"
+                 style="color: rgb(154,18,32);padding: 22px;padding-top: 41px;padding-bottom: 33px;height: 59px;">
+                <p style="font-size: 20px;font-weight: normal;font-family: Roboto, sans-serif;">Advisor Information</p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 text-nowrap">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label
+                                style="margin-right: 31px;">Deparmant&nbsp;<select
+                                class="form-control form-control-sm custom-select custom-select-sm"
+                                style="margin-right: -51px;">
+                            <option value="5" selected="">Select</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>&nbsp;</label><label style="margin-right: -22px;margin-left: 72px;">Show&nbsp;<select
+                                class="form-control form-control-sm custom-select custom-select-sm"
+                                style="margin-right: -28px;">
+                            <option value="5" selected="">5</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>&nbsp;</label></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search"
+                                                                                                         class="form-control form-control-sm"
+                                                                                                         aria-controls="dataTable"
+                                                                                                         placeholder="Search"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info"
+                     style="font-family: Roboto, sans-serif;">
+                    <table class="table my-0" id="dataTable">
+
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Research Fields</th>
+                            <th>Departmant</th>
+                            <th>Office</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <!-- -----------deneme--------
+
+                        <div class="form-popup" id="myForm">
+                          <form action="/action_page.php" class="form-container">
+                            <h1>Enter Thesis Topic</h1>
+
+
+                            <input type="text" placeholder="Thesis Topic" name="thesis topic" required>
+
+
+
+                            <button type="submit" class="btn">Propose</button>
+                            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                          </form>
+                        </div>
+
+
+
+
+
+                        -->
+
+
+                        {% for advisor in data.all_advisors %}
+                            <tr>
+                                <td><img class="rounded-circle mr-2" width="30" height="30"
+                                         src="{{ url_for('static', filename='img/avatar3.jpg') }}">{{ advisor.first_name }} {{ advisor.last_name }}
+                                </td>
+                                <td>{{ advisor.specialization }}</td>
+                                <td>Computer Engineering</td>
+                                <td>47</td>
+                                <td>
+
+                                    <button onclick="openModal('{{ advisor.first_name }} {{ advisor.last_name }}','{{ advisor.id }}')"
+                                            class="btn btn-primary"
+                                            type="button" style="background: rgb(154,18,32);">Propose
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td><strong>Research Fields</strong></td>
+                            <td><strong>Departmant</strong></td>
+                            <td><strong>Office</strong></td>
+                            <td><strong></strong></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 5
+                            of 5</p>
+                    </div>
+                    <div class="col-md-6">
+                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                            <ul class="pagination">
+                                <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
+                                        aria-hidden="true">«</span></a></li>
+                                <li class="page-item" id="active"><a class="page-link active" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
+                                        aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thesis Topic</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/createproposal">
+                        <div class="form-group">
+                            <label for="selectadvisor"> Selected Advisor</label>
+                            <select name="advisorid" id="selectadvisor" class="form-control">
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Enter Thesis Topic</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" name="thesistopic">
+                            <small id="emailHelp" class="form-text text-muted">Please only enter your thesis
+                                topic.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="background: rgb(154,18,32);">Submit
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(name,advId) {
+            $('#selectadvisor').html(`<option value=${advId}>${name}</option>`);
+            $('#myModal').modal('show');
+        }
+    </script>
+
+{% endblock %}
