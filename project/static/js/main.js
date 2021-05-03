@@ -1,6 +1,4 @@
 
-
-
 function changeSigninActive() {
 // if (  document.getElementById('signIn').className==="nav-link underlineHover buttonActive") {
 //   document.getElementById('signIn').className = "nav-link underlineHover buttonInactive"

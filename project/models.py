@@ -75,9 +75,10 @@ class Department(UserMixin, db.Model):
 
 class Proposal(UserMixin,db.Model) :
     proposal_id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    student_name = db.Column(db.String(1000))
     student_id = db.Column(db.Integer)
     advisor_id = db.Column(db.Integer)
     thesis_topic = db.Column(db.String(400))
-    is_accepted = db.Column(db.Boolean)
+    is_accepted = db.Column(db.String(10),default="0") # 0 : proposalda, 1:accepted, 2:rejected
     sent_date =  db.Column(db.DateTime, default=datetime.datetime.utcnow().replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Europe/Istanbul')))
 

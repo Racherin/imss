@@ -10,7 +10,8 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <!-- Tabs Titles -->
-        <a id="signIn" href="{{ url_for('auth.login') }}" class="nav-link underlineHover buttonInactive" role="tab" data-bs-toggle="tab">
+        <a id="signIn" href="{{ url_for('auth.login') }}" class="nav-link underlineHover buttonInactive" role="tab"
+           data-bs-toggle="tab">
             LOGIN </a>
         <a id="signUp" class="nav-link underlineHover buttonActive" role="tab" data-bs-toggle="tab">
             Sign Up </a>
@@ -24,36 +25,43 @@
             <!-- Signup Form -->
             <form method="POST" action="/signup">
                 {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                <div class="alert alert-danger" role="alert">
-                    {{ messages[0]}}
-                </div>
-                {% endif %}
+                    {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
                 {% endwith %}
 
-                <input type="email" id="login" class="fadeIn second" name="login" placeholder="School e-mail" pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:.">
-              <input type="text" id="text" class="fadeIn third" name="login" placeholder="School ID">
-              <input type="text" id="text" class="fadeIn third" name="login" placeholder="Specialization">
-              <input type="text" id="text" class="fadeIn third" name="login" placeholder="Office">
+                <input type="email" id="login" class="fadeIn second" name="email" placeholder="School e-mail"
+                       pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:.">
 
-        <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-        <div>
-        <div class="fadeIn fourth custom-select row6">
-            <select name="usertype" class="my-2">
-          <option value="student">Department</option>
-          <option value="advisor">Computer Engineering</option>
-          <option value="student">Chemistry </option>
-          <option value="student">Chemical Engineering </option>
-          <option value="student">Mathematics </option>
-      </select>
-            </div>
-        <div class="fadeIn fourth custom-select row6">
-            <select name="usertype" class="my-2">
-          <option value="student">Student</option>
-          <option value="advisor">Advisor</option>
-          <option value="student">Student</option>
-      </select>
-            </div></div>
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
+                <input type="password" id="password" class="fadeIn third" name="password_check" placeholder="Re-enter password">
+
+                <div>
+                    <!--
+                            <div class="fadeIn fourth custom-select row6">
+                               <select name="usertype" class="my-2">
+                              <option value="student">Department</option>
+                              <option value="advisor">Computer Engineering</option>
+                              <option value="student">Chemistry </option>
+                              <option value="student">Chemical Engineering </option>
+                              <option value="student">Mathematics </option>
+                          </select>
+
+                                </div>
+
+                                -->
+
+                    <div class="fadeIn fourth row6">
+                        <select name="usertype" class="selectpicker">
+                            <option value="student">Student</option>
+                            <option value="advisor">Advisor</option>
+
+                        </select>
+
+                    </div>
+                </div>
 
 
                 <input onclick="" type="submit" class="fadeIn fourth" value="Sign Up">
@@ -66,6 +74,5 @@
 
     </div>
 </div>
-<script src="project/static/js/main.js"></script>
 </body>
 </html>

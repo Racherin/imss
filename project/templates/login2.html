@@ -5,6 +5,8 @@
     <link rel="shortcut icon" type="image/jpg" href="vendor/images/favicon.png"/>
     <title>IMSS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
   </head>
   <body>
     <div class="wrapper fadeInDown">
@@ -12,6 +14,7 @@
       <!-- Tabs Titles -->
       <a id="signIn" class="nav-link underlineHover buttonActive"  role="tab" data-bs-toggle="tab">
        LOGIN </a>
+
       <a id="signUp" href="{{ url_for('auth.signup') }}" class="nav-link underlineHover buttonInactive"  role="tab" data-bs-toggle="tab">
       Sign Up </a>
 
@@ -61,8 +64,12 @@
         <a class="underlineHover" href="#">Forgot Password?</a>
       </div>
 
+
+
+
     </div>
   </div>
-<script src="project/static/js/main.js"></script>
+
+
   </body>
 </html>

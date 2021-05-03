@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fonts/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fonts/fontawesome5-overrides.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 
 </head>
 
@@ -34,15 +36,14 @@
         </a><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#"
                style="height: 12px;">
             <div class="sidebar-brand-icon rotate-n-15"></div>
-            <div class="sidebar-brand-text mx-3" style="margin: -1px;height: 118px;width: 128px;">
+            <div class="sidebar-brand-text mx-3" style="margin: -1px;height: 80px;width: 128px;">
                 <p style="height: 33px;font-family: Roboto, sans-serif;font-size: 15px;"><br><strong>IZTECH
                     MASTERS</strong><br><br></p>
-                <p style="font-family: Roboto, sans-serif;font-size: 14px;">STUDENT SYSTEM</p><span
-                    style="height: 61px;padding: 2px;"></span>
+                <p style="font-family: Roboto, sans-serif;font-size: 14px;">STUDENT SYSTEM</p>
             </div>
         </a>
             <hr class="sidebar-divider my-0">
-            <ul class="navbar-nav text-light" id="accordionSidebar">
+            <ul class="navbar-nav text-light mt-4" id="accordionSidebar">
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('main.dashboard') }}"><i
                         class="fas fa-tachometer-alt"></i><span
                         class="text-white">&nbsp; Dashboard</span></a></li>
@@ -58,8 +59,12 @@
 
                 {% if current_user.type_user == 'advisor' %}
                     <li class="nav-item"><a class="nav-link"
-                                            href="../../../Downloads/propose%203/192.168.1.2_8000/acceptrejectproposal.html"
+                                            href="{{ url_for('main.my_proposals') }}"
                                             style="margin-top: 0px;"><i class="fas fa-table"></i><span>&nbsp; Accept/Reject Proposal</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="{{ url_for('main.list_students') }}"
+                                            style="margin-top: 0px;"><i class="fas fa-user-graduate"></i><span>&nbsp; Students</span></a>
                     </li>
                 {% endif %}
 
@@ -227,6 +232,30 @@
 <script src="../../../Downloads/propose%203/192.168.1.2_8000/theme.js"></script>
 <script id="bs-live-reload" data-sseport="49899" data-lastchange="1619847507750"
         src="../../../Downloads/propose%203/192.168.1.2_8000/js/livereload.js"></script>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script>
+    $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+
+<script>
+    function openAcceptModal(student_id,proposal_id){
+        $('#accept-student-id').val(student_id);
+        $('#accept-proposal-id').val(proposal_id);
+        $('#acceptModal').modal('show');
+
+    }
+
+    function openRejectModal(student_id,proposal_id){
+        $('#reject-student-id').val(student_id);
+        $('#reject-proposal-id').val(proposal_id);
+        $('#rejectModal').modal('show');
+
+    }
+</script>
 </body>
 
 
