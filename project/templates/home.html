@@ -62,7 +62,7 @@
                 {% if current_user.type_user == 'advisor' %}
                     <li class="nav-item"><a class="nav-link"
                                             href="{{ url_for('main.my_proposals') }}"
-                                            style="margin-top: 0px;"><i class="fas fa-table"></i><span>&nbsp; Accept/Reject Proposal</span></a>
+                                            style="margin-top: 0px;"><i class="fas fa-table"></i><span>&nbsp; Accept/Reject Proposal <span class="badge badge-light p-1">{{ data.proposal_count }}</span></span></a>
                     </li>
                     <li class="nav-item"><a class="nav-link"
                                             href="{{ url_for('main.list_students') }}"

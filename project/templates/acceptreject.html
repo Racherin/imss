@@ -2,6 +2,18 @@
 
 
 {% block content %}
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
     <div id="content">
         <div class="container-fluid">
             <h3 class="text-dark mb-1">Proposal Requests</h3>
@@ -59,7 +71,7 @@
                                                 style="background: rgb(154,18,32);margin-left: 5px;margin-right: 5px;">
                                             Reject
                                         </button>
-                                        <a href="mailto:studentmail@gmail.com" class="btn btn-primary active"
+                                        <a href="mailto:{{ proposal.student_mail }}" class="btn btn-primary active"
                                            type="button"
                                            style="background: rgb(154,18,32);">Contact Student
                                         </a>
@@ -141,7 +153,7 @@
                     Click 'Reject' to confirm student's proposal rejection.
                 </div>
                 <div class="modal-footer">
-                   <form action="/proposal-answer-reject" method="post">
+                    <form action="/proposal-answer-reject" method="post">
                         <input id="reject-student-id" class="d-none" name="student_id" value="">
                         <input id="reject-proposal-id" class="d-none" name="proposal_id" value="">
                         <input class="d-none" name="acception-status" value="rejected">

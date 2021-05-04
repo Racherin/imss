@@ -51,6 +51,7 @@ h2:active {
 }
 
 /* --------------eray---------- */
+
 .buttonActive {
   color: black;
 }
@@ -58,6 +59,8 @@ h2:active {
   color: #cccccc;
 
 }
+
+
 
 .activer {
   visibility:visible;

@@ -16,9 +16,13 @@ def index():
 @main.route('/dashboard')
 @login_required
 def dashboard():
+    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                               Proposal.is_accepted == "0")).all()
+    proposal_count = len(get_proposals)
     data = {
         'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
         'usertype': str(current_user.type_user).title(),
+        'proposal_count':proposal_count
     }
     return render_template("dashboard.html", data=data)
 
@@ -26,6 +30,7 @@ def dashboard():
 @main.route('/propose-advisor')
 @login_required
 def propose_advisor():
+
     all_advisors = User.query.filter(User.type_user == 'advisor').all()
     get_student = User.query.filter(User.id == current_user.id).first()
     if get_student.advisor_id is not None :
@@ -46,10 +51,11 @@ def propose_advisor():
 def acceptpropsal():
     advisorid = request.form.get('advisorid')
     studentid = current_user.id
+    email = current_user.email
     student_name = str(current_user.first_name + " " + current_user.last_name)
     thesis_topic = request.form.get('thesistopic')
     new_proposal = Proposal(student_id=studentid, advisor_id=advisorid, thesis_topic=thesis_topic,
-                            student_name=student_name)
+                            student_name=student_name,student_mail=email)
     db.session.add(new_proposal)
     db.session.commit()
     flash("You have successfully proposed to advisor.","success")
@@ -61,11 +67,13 @@ def acceptpropsal():
 def my_proposals():
     get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
                                                Proposal.is_accepted == "0")).all()
+    proposal_count = len(get_proposals)
 
     data = {
         'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
         'usertype': str(current_user.type_user).title(),
         'all_proposals': get_proposals,
+        'proposal_count': proposal_count
 
     }
     return render_template("acceptreject.html", data=data)
@@ -81,7 +89,7 @@ def answer_proposal_accept():
     my_student.advisor_id = current_user.id
     flash("You have successfully accepted student's proposal.","success")
     db.session.commit()
-    return redirect(url_for('main.dashboard'))
+    return redirect(url_for('main.my_proposals'))
 
 
 @main.route('/proposal-answer-reject', methods=['POST'])
@@ -92,7 +100,7 @@ def answer_proposal_reject():
     my_proposal.is_accepted = "2"
     flash("You have successfully rejected student's proposal.","danger")
     db.session.commit()
-    return redirect(url_for('main.dashboard'))
+    return redirect(url_for('main.my_proposals'))
 
 
 
@@ -101,12 +109,16 @@ def answer_proposal_reject():
 @login_required
 def list_students():
     get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                               Proposal.is_accepted == "0")).all()
+    proposal_count = len(get_proposals)
+    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
                                                Proposal.is_accepted == "1")).all()
 
     data = {
         'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
         'usertype': str(current_user.type_user).title(),
         'all_proposals': get_proposals,
+        'proposal_count': proposal_count
 
     }
     return render_template("liststudents.html", data=data)

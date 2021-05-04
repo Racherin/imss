@@ -6,8 +6,7 @@ from flask_login import login_user, login_required, logout_user
 import requests
 import simplejson
 import json
-
-
+import re
 
 auth = Blueprint('auth', __name__)
 
@@ -34,6 +33,10 @@ def login_post():
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
+    if user.waiting_student_requests != "1":
+        flash("Please check your confirmation email before login.")
+        return redirect(url_for("auth.login"))
+
     if not user:
         flash('Please check your email and try again.')
         return redirect(url_for('auth.login'))  # if the user doesn't exist reload the page
@@ -59,18 +62,15 @@ def signup_post():
     password = request.form.get('password')
     password_check = request.form.get('password_check')
     usertype = request.form.get('usertype')
+    reg = ".{8,}"
+    reg_notwork = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,12}$"
 
+    pat = re.compile(reg_notwork)
+    mat = re.search(pat, password)
 
-    uri = "obsapi"
-
-    try:
-        obs_response = requests.get(uri)
-    except requests.ConnectionError :
-        flash("An error from OBS API")
+    if not mat:
+        flash("Your password cannot be " + password)
         return redirect(url_for("auth.signup"))
-    obs_response = obs_response.text
-    data = json.loads(obs_response)
-
 
     if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or str(
             email).strip() == '':
@@ -81,7 +81,7 @@ def signup_post():
         flash("Passwords do not match.")
         return redirect(url_for('auth.signup'))
 
-    if data[email]["type"] == "Student":
+    if usertype == "student":
         user = User.query.filter_by(
             email=email).first()  # if this returns a user, then the email already exists in database
         if user:  # if a user is found, we want to redirect back to signup page so user can try again
@@ -90,7 +90,7 @@ def signup_post():
 
         # create a new user with the form data. Hash the password so the plaintext version isn't saved.
         new_user = User(email=email, type_user='student', password=generate_password_hash(password, method='sha256'))
-    elif data[email]["type"] == "Student":
+    elif usertype == "advisor":
         user = User.query.filter_by(
             email=email).first()  # if this returns a user, then the email already exists in database
         if user:  # if a user is found, we want to redirect back to signup page so user can try again
@@ -103,7 +103,7 @@ def signup_post():
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
-
+    flash("You are signed up successfully we have sent you a confirmation  email")
     return redirect(url_for('auth.login'))
 
 
