@@ -35,8 +35,8 @@
                 <input type="email" id="login" class="fadeIn second" name="email" placeholder="School e-mail"
                        pattern="/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:.">
 
-                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
-                <input type="password" id="password" class="fadeIn third" name="password_check" placeholder="Re-enter password">
+                <input type="password" pattern="^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&*_=+-]).{8,12}$" id="password" class="fadeIn third" name="password" placeholder="Password">
+                <input type="password" pattern="^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&*_=+-]).{8,12}$" id="password2" class="fadeIn third" name="password_check" placeholder="Re-enter password">
 
                 <div>
                     <!--

@@ -20,7 +20,7 @@ def login_post():
     remember = True if request.form.get('remember') else False
     user = None
 
-    if str(email).endswith('@') or '@' not in str(email) or str(email).endswith('iyte.edu.tr') or str(
+    if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or str(
             email).strip() == '':
         flash('Please make sure that you enter valid mail.')
         return redirect(url_for('auth.login'))  # if the user doesn't exist reload the page
