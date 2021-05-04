@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from . import db
+from app import db
 from flask_login import login_required, current_user
-from .models import User, Proposal
+from models import User, Proposal
 from sqlalchemy import and_
 
 
@@ -110,3 +110,5 @@ def list_students():
 
     }
     return render_template("liststudents.html", data=data)
+
+

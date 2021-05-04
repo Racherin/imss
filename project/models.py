@@ -1,5 +1,5 @@
 import pytz
-from . import db
+from app import db
 import datetime
 from flask_login import UserMixin
 
