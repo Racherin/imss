@@ -1,0 +1,42 @@
+{
+  "gorkemgiray@iyte.edu.tr": {
+    "name": "Görkem Giray",
+    "email": "gorkemgiray@iyte.edu.tr",
+    "type": "Advisor"
+  },
+  "onurdemirors@iyte.edu.tr": {
+    "name": "Onur Demirörs",
+    "email": "onurdemirors@iyte.edu.tr",
+    "type": "Advisor"
+  },
+  "cemozan@iyte.edu.tr": {
+    "name": "Cem Ozan",
+    "email": "cemozan@iyte.edu.tr",
+    "type": "Student"
+  },
+  "dilekozturk@iyte.edu.tr": {
+    "name": "Dilek Öztürk",
+    "email": "dilekozturk@iyte.edu.tr",
+    "type": "Advisor"
+  },
+  "mertavincan@iyte.edu.tr": {
+    "name": "Mert Avıncan",
+    "email": "mertavincan@iyte.edu.tr",
+    "type": "Student"
+  },
+  "erayokutay@iyte.edu.tr": {
+    "name": "Eray Okutay",
+    "email": "erayokutay@iyte.edu.tr",
+    "type": "Student"
+  },
+  "hamitcelik@iyte.edu.tr": {
+    "name": "Hamit Mervan Çelik",
+    "email": "hamitcelik@iyte.edu.tr",
+    "type": "Student"
+  },
+  "osmanhicyilmaz@iyte.edu.tr": {
+    "name": "Osman Anıl Hiçyılmaz",
+    "email": "osmanhicyilmaz@iyte.edu.tr",
+    "type": "Student"
+  }
+}

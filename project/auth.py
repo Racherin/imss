@@ -1,8 +1,13 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from models import User
 from flask_login import login_user, login_required, logout_user
+import requests
+import simplejson
+import json
+
+
 
 auth = Blueprint('auth', __name__)
 
@@ -55,11 +60,28 @@ def signup_post():
     password_check = request.form.get('password_check')
     usertype = request.form.get('usertype')
 
+
+    uri = "obsapi"
+
+    try:
+        obs_response = requests.get(uri)
+    except requests.ConnectionError :
+        flash("An error from OBS API")
+        return redirect(url_for("auth.signup"))
+    obs_response = obs_response.text
+    data = json.loads(obs_response)
+
+
+    if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or str(
+            email).strip() == '':
+        flash('Please make sure that you enter valid mail.')
+        return redirect(url_for('auth.signup'))  # if the user doesn't exist reload the page
+
     if password_check != password:
         flash("Passwords do not match.")
         return redirect(url_for('auth.signup'))
 
-    if usertype == 'student':
+    if data[email]["type"] == "Student":
         user = User.query.filter_by(
             email=email).first()  # if this returns a user, then the email already exists in database
         if user:  # if a user is found, we want to redirect back to signup page so user can try again
@@ -68,7 +90,7 @@ def signup_post():
 
         # create a new user with the form data. Hash the password so the plaintext version isn't saved.
         new_user = User(email=email, type_user='student', password=generate_password_hash(password, method='sha256'))
-    elif usertype == 'advisor':
+    elif data[email]["type"] == "Student":
         user = User.query.filter_by(
             email=email).first()  # if this returns a user, then the email already exists in database
         if user:  # if a user is found, we want to redirect back to signup page so user can try again
