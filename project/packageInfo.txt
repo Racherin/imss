@@ -6,7 +6,7 @@ Service Package: main.py, auth.py, app.py
 
 Business Logic: auth.py
 
-Database Controller: main.py, auth.py
+Database Controller: app.py
 
 Database: db.sqlite
 

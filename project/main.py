@@ -8,6 +8,15 @@ from sqlalchemy import and_
 main = Blueprint('main', __name__)
 
 
+"""
+This file includes some examples of how to handle HTTP requests about user pages and post requests from different users.
+We pass the value '/' to @app.route() to signify that this function will respond to web requests for the URL /, which is
+the login URL.
+If @main.route() includes a methods=['POST'], that means we'll handle a post requests and redirect user to another page 
+instead of rendering a html.
+"""
+
+
 @main.route('/')
 def index():
     return render_template("login2.html")

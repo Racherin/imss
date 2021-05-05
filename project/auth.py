@@ -8,6 +8,17 @@ import simplejson
 import json
 import re
 
+
+"""
+
+This file includes some examples of how to handle HTTP requests about authentication process.
+Once we create the app instance before in the app.py file, we'll use it to handle incoming web requests and send 
+responses to the user.
+@app.route is a decorator that turns a regular Python function into a Flask view function, which converts the function’s
+return value into an HTTP response to be displayed by an HTTP client, such as a web browser. 
+
+"""
+
 auth = Blueprint('auth', __name__)
 
 

@@ -2,22 +2,29 @@ from datetime import timedelta
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from models import User
 
-# init SQLAlchemy so we can use it later in our models
-db = SQLAlchemy()
+"""
+This file includes initialization of database and base application of flask web server.
+In the preceding code block, you first import the Flask object from the flask package. 
+Then use it to create your Flask application instance with the name app. 
+You pass the special variable __name__ that holds the name of the current Python module. 
+It’s used to tell the instance where it’s located.
+"""
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# init SQLAlchemy so we can use it later in our models
+db = SQLAlchemy()
+
 db.init_app(app)
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
-app.permanent_session_lifetime = timedelta(minutes=60)  # SON HALİNDE 1 DK OLACAK
-
-from models import User
+app.permanent_session_lifetime = timedelta(minutes=60)
 
 
 @login_manager.user_loader

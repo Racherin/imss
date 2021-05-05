@@ -4,6 +4,12 @@ import datetime
 from flask_login import UserMixin
 
 
+"""
+We use models.py to create our database tables via SQLAlchemy classes. Columns provides define a table column.
+Primary keys are marked with primary_key=True. 
+"""
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True, nullable=False)
