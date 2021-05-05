@@ -67,7 +67,7 @@ def signup_post():
 
     pat = re.compile(reg_notwork)
     mat = re.search(pat, password)
-
+    new_user = None
     if not mat:
         flash("Your password cannot be " + password)
         return redirect(url_for("auth.signup"))
@@ -81,28 +81,28 @@ def signup_post():
         flash("Passwords do not match.")
         return redirect(url_for('auth.signup'))
 
-    if usertype == "student":
-        user = User.query.filter_by(
-            email=email).first()  # if this returns a user, then the email already exists in database
-        if user:  # if a user is found, we want to redirect back to signup page so user can try again
-            flash('Email address already exists')
-            return redirect(url_for('auth.signup'))
-
-        # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-        new_user = User(email=email, type_user='student', password=generate_password_hash(password, method='sha256'))
-    elif usertype == "advisor":
-        user = User.query.filter_by(
-            email=email).first()  # if this returns a user, then the email already exists in database
-        if user:  # if a user is found, we want to redirect back to signup page so user can try again
-            flash('Email address already exists')
-            return redirect(url_for('auth.signup'))
-
-        # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-        new_user = User(email=email, type_user='advisor', password=generate_password_hash(password, method='sha256'))
-
-    # add the new user to the database
-    db.session.add(new_user)
-    db.session.commit()
+    # if usertype == "student":
+    #     user = User.query.filter_by(
+    #         email=email).first()  # if this returns a user, then the email already exists in database
+    #     if user:  # if a user is found, we want to redirect back to signup page so user can try again
+    #         flash('Email address already exists')
+    #         return redirect(url_for('auth.signup'))
+    #
+    #     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+    #     new_user = User(email=email, type_user='student', password=generate_password_hash(password, method='sha256'))
+    # elif usertype == "advisor":
+    #     user = User.query.filter_by(
+    #         email=email).first()  # if this returns a user, then the email already exists in database
+    #     if user:  # if a user is found, we want to redirect back to signup page so user can try again
+    #         flash('Email address already exists')
+    #         return redirect(url_for('auth.signup'))
+    #
+    #     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+    #     new_user = User(email=email, type_user='advisor', password=generate_password_hash(password, method='sha256'))
+    #
+    # # add the new user to the database
+    # db.session.add(new_user)
+    # db.session.commit()
     flash("You are signed up successfully we have sent you a confirmation  email")
     return redirect(url_for('auth.login'))
 
