@@ -1,0 +1,15 @@
+User Interface Package: templates
+
+User Interaction Package: auth.py
+
+Service Package: main.py, auth.py, app.py
+
+Business Logic: auth.py
+
+Database Controller: main.py, auth.py
+
+Database: db.sqlite
+
+Database Model: models.py
+
+External System: We created a mock object named as "obs.json" which mimics the OBS API
