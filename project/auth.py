@@ -44,7 +44,7 @@ def login_post():
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
-    if user.waiting_student_requests != "1":
+    if user.confirmed != "1":
         flash("Please check your confirmation email before login.")
         return redirect(url_for("auth.login"))
 
