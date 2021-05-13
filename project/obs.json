@@ -57,5 +57,11 @@
     "department": "Computer Engineering",
     "courses" : ["CENG555"],
     "GPA": 3.12
+  },
+    "kemalduman@iyte.edu.tr": {
+    "name" : "Kemal Duman",
+    "email": "kemalduman@iyte.edu.tr",
+    "type": "Student",
+    "department": "Computer Engineering"
   }
 }
