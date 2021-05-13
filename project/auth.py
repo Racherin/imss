@@ -7,7 +7,7 @@ import re
 from obs import OBSWrapper
 from app import s, app
 from flask_mail import Message, Mail
-
+from itsdangerous import SignatureExpired
 
 
 """
@@ -37,7 +37,7 @@ def login_post():
     remember = True if request.form.get('remember') else False
     user = None
 
-    if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or str(
+    if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or not str(email).endswith('std.iyte.edu.tr') or str(
             email).strip() == '':
         flash('Please make sure that you enter valid mail.')
         return redirect(url_for('auth.login'))  # if the user doesn't exist reload the page
@@ -154,5 +154,17 @@ def logout():
 
 @app.route('/confirm_email/<token>')
 def confirm_email(token):
-    email = s.loads(token, salt='email-confirm', max_age=3600)
-    return '<h1>The token works!</h1>'
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=3600)
+    except SignatureExpired :
+        flash("Activation token expired.")
+        return redirect(url_for("auth.login"))
+
+    user = User.query.filter_by(
+        email=email).first()
+
+    user.confirmed = True
+
+    db.session.commit()
+    flash("Activation succesfull !")
+    return redirect(url_for("auth.login"))
