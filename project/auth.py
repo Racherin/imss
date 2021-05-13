@@ -46,7 +46,7 @@ def login_post():
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
-    if user.confirmed != "1":
+    if user.confirmed != True :
         flash("Please check your confirmation email before login.")
         return redirect(url_for("auth.login"))
 
@@ -61,6 +61,9 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     return redirect(url_for('main.dashboard'))
+
+
+
 @auth.route('/forgotpassword')
 def forgotpassword():
     return render_template("forgotpassword.html")

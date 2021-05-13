@@ -511,16 +511,20 @@ input[type=email]placeholder {
                 <input type="password"
                        id="password2" class="fadeIn third" name="password_check" placeholder="Re-enter password"
                        required>
+            <div class="fadeIn second">
+            <input style="margin-right: 2px"   type="checkbox" onclick="myFunction()"><span class="fadeIn second">Show Password</span> <br> </div>
+                <div>
  <p style="margin: 0">
 
-                    <small id="emailHelp" class="fadeIn second form-text text-muted d-block" style="padding: 0 12px">Your password should include at least
+                    <small id="emailHelp" class="fadeIn second form-text text-muted d-block" style="padding: 0 12px;font-size: 12px">Your password should include at least
                         one uppercase letter, lowercase letter, symbol, number and should be minimum 8 character length.
 
 
                 </small>
 
                 </p>
-                <div>
+
+
                     <!--
                             <div class="fadeIn fourth custom-select row6">
                                <select name="usertype" class="my-2">
@@ -562,6 +566,18 @@ input[type=email]placeholder {
         crossorigin="anonymous"></script>
 
 <script>
+
+    function myFunction() {
+    var x = document.getElementById("password");
+    var y = document.getElementById("password2");
+    if (x.type === "password") {
+      x.type = "text";
+      y.type = "text";
+    } else {
+      x.type = "password";
+      y.type = "password";
+    }
+  }
 
 
     function changeSigninActive() {
