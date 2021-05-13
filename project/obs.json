@@ -1,6 +1,6 @@
 {
   "gorkemgiray@iyte.edu.tr": {
-    "first_name" : "Görkem Giray",
+    "name" : "Görkem Giray",
     "email": "gorkemgiray@iyte.edu.tr",
     "type": "Advisor",
     "department": "Computer Engineering"
@@ -53,6 +53,14 @@
   "osmanhicyilmaz@iyte.edu.tr": {
     "name": "Osman Anıl Hiçyılmaz",
     "email": "osmanhicyilmaz@iyte.edu.tr",
+    "type": "Student",
+    "department": "Computer Engineering",
+    "courses" : ["CENG555"],
+    "GPA": 3.12
+  },
+  "kemalduman@iyte.edu.tr": {
+    "name" : "Kemal Duman",
+    "email": "kemalduman@iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
     "courses" : ["CENG555"],
