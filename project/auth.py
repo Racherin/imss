@@ -61,7 +61,13 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     return redirect(url_for('main.dashboard'))
+@auth.route('/forgotpassword')
+def forgotpassword():
+    return render_template("forgotpassword.html")
 
+@auth.route('/resetpassword')
+def resetpassword():
+    return render_template("resetpassword.html")
 
 @auth.route('/signup')
 def signup():
