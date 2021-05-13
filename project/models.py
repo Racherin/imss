@@ -15,7 +15,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(100))
-    middle_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
     dept_id = db.Column(db.Integer)  # Dept table eklenecek
     nationality = db.Column(db.String(200))

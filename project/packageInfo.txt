@@ -1,10 +1,10 @@
 User Interface Package: templates
 
-User Interaction Package: auth.py
+User Interaction Package:
 
-Service Package: main.py, auth.py, app.py
+Service Package: main.py, auth.py
 
-Business Logic: auth.py
+Business Logic:
 
 Database Controller: app.py
 

@@ -1,8 +1,9 @@
 {
   "gorkemgiray@iyte.edu.tr": {
-    "first_name"
+    "first_name" : "Görkem Giray",
     "email": "gorkemgiray@iyte.edu.tr",
-    "type": "Advisor"
+    "type": "Advisor",
+    "courses" : ["CENG555"]
   },
   "onurdemirors@iyte.edu.tr": {
     "name": "Onur Demirörs",
@@ -12,7 +13,10 @@
   "cemozan@iyte.edu.tr": {
     "name": "Cem Ozan",
     "email": "cemozan@iyte.edu.tr",
-    "type": "Student"
+    "type": "Student",
+    "courses" : ["CENG555"],
+    "GPA": 3.12
+
   },
   "dilekozturk@iyte.edu.tr": {
     "name": "Dilek Öztürk",

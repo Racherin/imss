@@ -2,7 +2,7 @@ from datetime import timedelta
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from models import User
+
 
 """
 This file includes initialization of database and base application of flask web server.
@@ -17,16 +17,24 @@ app.config['SECRET_KEY'] = 'secret-key-goes-here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+
+
+UPLOAD_FOLDER = '/media'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 
 db.init_app(app)
+
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 app.permanent_session_lifetime = timedelta(minutes=60)
 
-
+from models import User
 @login_manager.user_loader
 def load_user(user_id):
     # since the user_id is just the primary key of our user table, use it in the query for the user
