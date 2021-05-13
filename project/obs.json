@@ -3,17 +3,19 @@
     "first_name" : "Görkem Giray",
     "email": "gorkemgiray@iyte.edu.tr",
     "type": "Advisor",
-    "courses" : ["CENG555"]
+    "department": "Computer Engineering"
   },
   "onurdemirors@iyte.edu.tr": {
     "name": "Onur Demirörs",
     "email": "onurdemirors@iyte.edu.tr",
-    "type": "Advisor"
+    "type": "Advisor",
+    "department": "Computer Engineering"
   },
   "cemozan@iyte.edu.tr": {
     "name": "Cem Ozan",
     "email": "cemozan@iyte.edu.tr",
     "type": "Student",
+    "department": "Computer Engineering",
     "courses" : ["CENG555"],
     "GPA": 3.12
 
@@ -21,26 +23,39 @@
   "dilekozturk@iyte.edu.tr": {
     "name": "Dilek Öztürk",
     "email": "dilekozturk@iyte.edu.tr",
-    "type": "Advisor"
+    "type": "Advisor",
+    "department": "Computer Engineering"
   },
   "mertavincan@iyte.edu.tr": {
     "name": "Mert Avıncan",
     "email": "mertavincan@iyte.edu.tr",
-    "type": "Student"
+    "type": "Student",
+    "department": "Computer Engineering",
+    "courses" : ["CENG555"],
+    "GPA": 3.12
   },
   "erayokutay@iyte.edu.tr": {
     "name": "Eray Okutay",
     "email": "erayokutay@iyte.edu.tr",
-    "type": "Student"
+    "type": "Student",
+    "department": "Computer Engineering",
+    "courses" : ["CENG555"],
+    "GPA": 3.12
   },
   "hamitcelik@iyte.edu.tr": {
     "name": "Hamit Mervan Çelik",
     "email": "hamitcelik@iyte.edu.tr",
-    "type": "Student"
+    "type": "Student",
+    "department": "Computer Engineering",
+    "courses" : ["CENG555"],
+    "GPA": 3.12
   },
   "osmanhicyilmaz@iyte.edu.tr": {
     "name": "Osman Anıl Hiçyılmaz",
     "email": "osmanhicyilmaz@iyte.edu.tr",
-    "type": "Student"
+    "type": "Student",
+    "department": "Computer Engineering",
+    "courses" : ["CENG555"],
+    "GPA": 3.12
   }
 }
