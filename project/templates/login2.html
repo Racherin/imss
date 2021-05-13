@@ -117,7 +117,7 @@ h2:active {
 }
 
 .custom-select select {
-  display: none; /hide original SELECT element: /
+  display: none; 
   border-radius: 25px;
 }
 
@@ -504,14 +504,17 @@ input[type=email]placeholder {
               <option value="advisor">Advisor</option>
               <option value="student">Student</option>
             </select>
-            </div>
-          <div class="field">
-                <label class="checkbox">
-                    <input type="checkbox">
-                    Remember me
-                </label>
-            </div>
-        <input  type="submit" class="fadeIn fourth" value="Log In">
+            </div >
+            <div class="fadeIn second">
+            <input style="margin-right: 2px"   type="checkbox" onclick="myFunction()"><span class="fadeIn second">Show Password</span> <br>
+        <input style="margin-bottom: 2px;"  type="submit" class="fadeIn fourth" value="Log In">
+      </div>
+        <div style="margin-bottom: 50px;" class="field fadeIn second" >
+          <label   class="checkbox">
+              <input type="checkbox">
+              Remember me
+          </label>
+      </div>
 
       </form>
 </div>
@@ -526,7 +529,16 @@ input[type=email]placeholder {
 
     </div>
   </div>
-
+<script>
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 
   </body>
 </html>
