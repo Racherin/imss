@@ -3,6 +3,7 @@ from app import db
 from flask_login import login_required, current_user
 from models import User, Proposal
 from sqlalchemy import and_
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 main = Blueprint('main', __name__)
@@ -42,6 +43,7 @@ def propose_advisor():
 
     all_advisors = User.query.filter(User.type_user == 'advisor').all()
     get_student = User.query.filter(User.id == current_user.id).first()
+    print(get_student.advisor_id,"asdadasdasda")
     if get_student.advisor_id is not None :
         get_accepted_advisor = User.query.filter(User.id == get_student.advisor_id).first()
         flash("Your proposal is already accepted by "+ get_accepted_advisor.first_name+" "+get_accepted_advisor.last_name,"success")
@@ -132,4 +134,43 @@ def list_students():
     }
     return render_template("liststudents.html", data=data)
 
+@main.route('/updatepassword')
+def update_password():
+    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                               Proposal.is_accepted == "0")).all()
+    proposal_count = len(get_proposals)
+    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                               Proposal.is_accepted == "1")).all()
+    data = {
+        'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
+        'usertype': str(current_user.type_user).title(),
+        'all_proposals': get_proposals,
+        'proposal_count': proposal_count
 
+    }
+
+    return render_template("updatepassword.html",data=data)
+
+@main.route("/updatepassword",methods=['POST'])
+def update_password_post():
+    current_password = request.form.get("current_password")
+    new_password = request.form.get("new_password")
+    new_password_again = request.form.get("new_password2")
+
+    if not new_password == new_password_again :
+        flash("Passwords are not match.","danger")
+        return redirect(url_for("main.update_password"))
+
+    user = User.query.filter_by(
+        email=current_user.email).first()
+
+    if not check_password_hash(user.password, current_password) :
+        flash("Please enter correct password","danger")
+        return redirect(url_for("main.update_password"))
+
+    user.password = generate_password_hash(new_password)
+
+    db.session.commit()
+
+    flash("Password change successfull","success")
+    return redirect(url_for("main.update_password"))

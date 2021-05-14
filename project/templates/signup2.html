@@ -488,11 +488,13 @@ input[type=email]placeholder {
         <div id="signUpTab" role="tabpanel" class="col-lg-9  tab-pane activer" id="signupPage">
             <!-- Signup Form -->
             <form method="POST" action="/signup">
-                {% with messages = get_flashed_messages() %}
+                {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ messages[0] }}
-                        </div>
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                     {% endif %}
                 {% endwith %}
 
@@ -555,7 +557,7 @@ input[type=email]placeholder {
         </div>
         <!-- Remind Passowrd -->
         <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
+            <a class="underlineHover" href="{{ url_for("auth.forgot_password") }}">Forgot Password?</a>
         </div>
 
     </div>
