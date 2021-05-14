@@ -9,7 +9,6 @@ from app import s, app
 from flask_mail import Message, Mail
 from itsdangerous import SignatureExpired
 
-
 """
 
 This file includes some examples of how to handle HTTP requests about authentication process.
@@ -37,7 +36,8 @@ def login_post():
     remember = True if request.form.get('remember') else False
     user = None
 
-    if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or not str(email).endswith('std.iyte.edu.tr') or str(
+    if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or not str(
+            email).endswith('std.iyte.edu.tr') or str(
             email).strip() == '':
         flash('Please make sure that you enter valid mail.')
         return redirect(url_for('auth.login'))  # if the user doesn't exist reload the page
@@ -46,7 +46,7 @@ def login_post():
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
-    if user.confirmed != True :
+    if user.confirmed != True:
         flash("Please check your confirmation email before login.")
         return redirect(url_for("auth.login"))
 
@@ -61,31 +61,17 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     return redirect(url_for('main.dashboard'))
-@auth.route('/forgotpassword')
-def forgotpassword():
-    return render_template("forgotpassword.html")
-
-@auth.route('/resetpassword')
-def resetpassword():
-    return render_template("resetpassword.html")
 
 
 @auth.route('/forgotpassword')
 def forgotpassword():
     return render_template("forgotpassword.html")
 
-@auth.route('/resetpassword')
-def resetpassword():
-    return render_template("resetpassword.html")
-
-
-@auth.route('/forgotpassword')
-def forgotpassword():
-    return render_template("forgotpassword.html")
 
 @auth.route('/resetpassword')
 def resetpassword():
     return render_template("resetpassword.html")
+
 
 @auth.route('/signup')
 def signup():
@@ -180,7 +166,7 @@ def logout():
 def confirm_email(token):
     try:
         email = s.loads(token, salt='email-confirm', max_age=3600)
-    except SignatureExpired :
+    except SignatureExpired:
         flash("Activation token expired.")
         return redirect(url_for("auth.login"))
 
