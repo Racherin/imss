@@ -25,16 +25,23 @@ class User(db.Model, UserMixin):
 
 
 class Student(User):
+    __tablename__ = 'Student'
     thesis_topic = db.Column(db.String(2000))
     thesis_file = db.Column(db.Boolean, default=False)
     advisor_id = db.Column(db.Integer)
     task_id = db.Column(db.Integer)
+    __mapper_args__ = {
+        'polymorphic_identity': 'Student',
+    }
 
 
 class Advisor(User):
+    __tablename__ = 'Advisor'
     waiting_student_requests = db.Column(db.String(3000))  # "['232323','3434343','323232']"
     avaliable_hours = db.Column(db.String(1000))  # "{'monday':'14.00-15.00','tuesday':....}"
-
+    __mapper_args__ = {
+        'polymorphic_identity': 'Advisor',
+    }
 
 class Task(UserMixin, db.Model):
     task_id = db.Column(db.Integer, primary_key=True)

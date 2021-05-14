@@ -8,6 +8,9 @@ class OBSWrapper:
         self.data = {}
         if self.req[email] is not None:
             self.user = self.req[email]
+            self.response = "success"
+        else :
+            self.response = "error"
 
     def get_user_name(self):
         return self.user['name']

@@ -505,29 +505,26 @@ input[type=email]placeholder {
 
                 </p>
 
-                <input type="text" id="first_name" class="fadeIn second" name="first_name" placeholder="First Name"
-                       required>
-                <input type="text" id="middle_name" class="fadeIn second" name="middle_name" placeholder="Middle Name">
-                <input type="text" id="last_name" class="fadeIn second" name="last_name" placeholder="Last Name"
-                       required>
-
-
                 <input type="password"
                        id="password" class="fadeIn third" name="password" placeholder="Password" required>
-                <p style="margin: 0">
 
-                    <small id="emailHelp" class="fadeIn second form-text text-muted d-block" style="padding: 0 12px">Your password should include at least
+                <input type="password"
+                       id="password2" class="fadeIn third" name="password_check" placeholder="Re-enter password"
+                       required>
+            <div class="fadeIn second">
+            <input style="margin-right: 2px"   type="checkbox" onclick="myFunction()"><span class="fadeIn second">Show Password</span> <br> </div>
+                <div>
+ <p style="margin: 0">
+
+                    <small id="emailHelp" class="fadeIn second form-text text-muted d-block" style="padding: 0 12px;font-size: 12px">Your password should include at least
                         one uppercase letter, lowercase letter, symbol, number and should be minimum 8 character length.
 
 
                 </small>
 
                 </p>
-                <input type="password"
-                       id="password2" class="fadeIn third" name="password_check" placeholder="Re-enter password"
-                       required>
 
-                <div>
+
                     <!--
                             <div class="fadeIn fourth custom-select row6">
                                <select name="usertype" class="my-2">
@@ -569,6 +566,18 @@ input[type=email]placeholder {
         crossorigin="anonymous"></script>
 
 <script>
+
+    function myFunction() {
+    var x = document.getElementById("password");
+    var y = document.getElementById("password2");
+    if (x.type === "password") {
+      x.type = "text";
+      y.type = "text";
+    } else {
+      x.type = "password";
+      y.type = "password";
+    }
+  }
 
 
     function changeSigninActive() {

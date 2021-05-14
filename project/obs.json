@@ -1,6 +1,6 @@
 {
   "gorkemgiray@iyte.edu.tr": {
-    "first_name" : "Görkem Giray",
+    "name" : "Görkem Giray",
     "email": "gorkemgiray@iyte.edu.tr",
     "type": "Advisor",
     "department": "Computer Engineering"
@@ -11,9 +11,9 @@
     "type": "Advisor",
     "department": "Computer Engineering"
   },
-  "cemozan@iyte.edu.tr": {
+  "cemozan@std.iyte.edu.tr": {
     "name": "Cem Ozan",
-    "email": "cemozan@iyte.edu.tr",
+    "email": "cemozan@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
     "courses" : ["CENG555"],
@@ -26,33 +26,41 @@
     "type": "Advisor",
     "department": "Computer Engineering"
   },
-  "mertavincan@iyte.edu.tr": {
+  "mertavincan@std.iyte.edu.tr": {
     "name": "Mert Avıncan",
-    "email": "mertavincan@iyte.edu.tr",
+    "email": "mertavincan@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
     "courses" : ["CENG555"],
     "GPA": 3.12
   },
-  "erayokutay@iyte.edu.tr": {
+  "erayokutay@std.iyte.edu.tr": {
     "name": "Eray Okutay",
-    "email": "erayokutay@iyte.edu.tr",
+    "email": "erayokutay@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
     "courses" : ["CENG555"],
     "GPA": 3.12
   },
-  "hamitcelik@iyte.edu.tr": {
+  "hamitcelik@std.iyte.edu.tr": {
     "name": "Hamit Mervan Çelik",
-    "email": "hamitcelik@iyte.edu.tr",
+    "email": "hamitcelik@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
     "courses" : ["CENG555"],
     "GPA": 3.12
   },
-  "osmanhicyilmaz@iyte.edu.tr": {
+  "osmanhicyilmaz@std.iyte.edu.tr": {
     "name": "Osman Anıl Hiçyılmaz",
-    "email": "osmanhicyilmaz@iyte.edu.tr",
+    "email": "osmanhicyilmaz@std.iyte.edu.tr",
+    "type": "Student",
+    "department": "Computer Engineering",
+    "courses" : ["CENG555"],
+    "GPA": 3.12
+  },
+  "kemalduman@iyte.edu.tr": {
+    "name" : "Kemal Duman",
+    "email": "kemalduman@iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
     "courses" : ["CENG555"],

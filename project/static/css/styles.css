@@ -51,6 +51,45 @@ h2:active {
 }
 
 /* --------------eray---------- */
+.btn-primary {
+  border: none !important;
+}
+
+.page-link.active {
+  background-color: #9A1220;
+  color: white;
+}
+
+.page-link {
+  color: black;
+}
+
+
+.downloadButton {
+ color:#9a1220;
+  font-size:1.3rem;
+}
+
+.downloadButton:hover { 
+  transform: scale(1.2);
+  color:#9e414c;
+
+}
+
+.submitButton:hover { 
+  transform: scale(1.1);
+  background-color:#9e414c;
+  
+
+}
+
+.alert-custom {
+
+text-align: center;
+margin-top:5px;
+
+}
+
 
 .buttonActive {
   color: black;
