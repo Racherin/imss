@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+app.config['UPLOAD_FOLDER'] = 'uploads/'
 
 
 app.config['MAIL_SERVER'] ='smtp.gmail.com'
@@ -28,7 +28,6 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
-
 
 
 s = URLSafeTimedSerializer('Thisisasecret!')
@@ -65,6 +64,10 @@ app.register_blueprint(auth_blueprint)
 from main import main as main_blueprint
 
 app.register_blueprint(main_blueprint)
+
+from files import files as files_blueprint
+
+app.register_blueprint(files_blueprint)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support

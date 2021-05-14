@@ -174,3 +174,5 @@ def update_password_post():
 
     flash("Password change successfull","success")
     return redirect(url_for("main.update_password"))
+
+
