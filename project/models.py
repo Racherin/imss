@@ -80,3 +80,5 @@ class Proposal(UserMixin, db.Model):
     is_accepted = db.Column(db.String(10), default="0")  # 0 : proposalda, 1:accepted, 2:rejected
     sent_date = db.Column(db.DateTime, default=datetime.datetime.utcnow().replace(tzinfo=pytz.utc).astimezone(
         pytz.timezone('Europe/Istanbul')))
+
+

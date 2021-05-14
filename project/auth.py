@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from models import User, Department
@@ -8,7 +8,8 @@ from obs import OBSWrapper
 from app import s, app
 from flask_mail import Message, Mail
 from itsdangerous import SignatureExpired
-from sqlalchemy import and_
+import os
+
 
 """
 
@@ -205,6 +206,10 @@ def signup_post():
     link = url_for('confirm_email', token=token, _external=True)
     msg.body = 'Your link is {}'.format(link)
     mail.send(msg)
+
+
+    get_user = User.query.filter(User.email == email).first()
+    os.makedirs(current_app.root_path + "/media/" + str(get_user.id))
     flash("You are signed up successfully we have sent you a confirmation  email", 'success')
     return redirect(url_for('auth.login'))
 

@@ -61,14 +61,15 @@
                             class="fas fa-user"></i><span>&nbsp; &nbsp;Forms/Documents</span></a></li>
 
 
-                
+
 
                 {% endif %}
 
                 {% if current_user.type_user == 'advisor' %}
                     <li class="nav-item"><a class="nav-link"
                                             href="{{ url_for('main.my_proposals') }}"
-                                            style="margin-top: 0px;"><i class="fas fa-table"></i><span>&nbsp; Accept/Reject Proposal <span class="badge badge-light p-1">{{ data.proposal_count }}</span></span></a>
+                                            style="margin-top: 0px;"><i class="fas fa-table"></i><span>&nbsp; Accept/Reject Proposal <span
+                            class="badge badge-light p-1">{{ data.proposal_count }}</span></span></a>
                     </li>
                     <li class="nav-item"><a class="nav-link"
                                             href="{{ url_for('main.list_students') }}"
@@ -92,7 +93,7 @@
                 <div class="container-fluid">
                     <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i
                             class="fas fa-bars"></i></button>
-                   
+
                     <ul class="navbar-nav flex-nowrap ml-auto">
                         <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
                                                                             aria-expanded="false" data-toggle="dropdown"
@@ -257,18 +258,12 @@
 
 
 <script>
-var root_path = "{{ data.root_path }}" ;
-$("#download-file").attr("href", String(root_path) + $("#selected").val());
-$( "#select-change" )
-  .change(function () {
-    var str = "";
-    $( "select option:selected" ).each(function() {
-      str += $(this).val() + " ";
-    });
-
-  })
-  .change();
-
+    var selected_doc = "/download/" + $("#selected").val();
+    $(".download-file").attr("href", selected_doc);
+    $("#select-forms").change(function () {
+            var selected_doc = "/download/" + $("#select-forms option:selected").val();
+            $(".download-file").attr("href", selected_doc);
+        })
 </script>
 
 </body>
