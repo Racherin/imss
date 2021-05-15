@@ -31,10 +31,10 @@
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Departmant</th>
+                                <th>Department</th>
                                 <th>Thesis Topic</th>
 
-                                <th></th>
+                                <th>Student Information</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,7 +50,7 @@
                                     <td data-toggle="tooltip" data-placement="right"
                                         title="{{ proposal.thesis_topic }}">{{ proposal.thesis_topic | truncate(50,true,'...') }}</td>
                                     <td>
-
+                                        <button href="#" type="button" class="btn btn-danger cpbutton">Student Information</button>
                                     </td>
                                 </tr>
 
@@ -59,7 +59,7 @@
                             <tfoot>
                             <tr>
                                 <td><strong>Name</strong></td>
-                                <td><strong>Departmant</strong></td>
+                                <td><strong>Department</strong></td>
                                 <td>Thesis Topic</td>
                                 <td></td>
                                 <td><strong></strong></td>

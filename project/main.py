@@ -23,6 +23,7 @@ def index():
     return render_template("login2.html")
 
 
+
 @main.route('/dashboard')
 @login_required
 def dashboard():
@@ -132,7 +133,7 @@ def list_students():
         'proposal_count': proposal_count
 
     }
-    return render_template("liststudents.html", data=data)
+    return render_template("displaystudent.html", data=data)
 
 @main.route('/updatepassword')
 def update_password():
