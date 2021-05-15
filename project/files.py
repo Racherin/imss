@@ -56,7 +56,7 @@ def upload_file():
         flash("File upload successfull", "success")
 
         msg = Message('File upload', sender='imssconfirm@gmail.com', recipients=[current_user.email])
-        msg.body = 'Dear '+current_user.first_name+" "+current_user.last_name+',\nYour file ' + uploaded_file.filename +\
+        msg.body = 'Dear ' + current_user.first_name + " " + current_user.last_name + ',\nYour file ' + uploaded_file.filename + \
                    ' submission is successfull.\nIZTECH Master\'s Student System 2021\n'
         mail.send(msg)
 
