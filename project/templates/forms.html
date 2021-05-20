@@ -25,77 +25,43 @@
             <div>
                 <p class="p-3">Select a file from below to display or upload or delete.</p>
             </div>
-            <select id="select-forms" class="form-control d-inline" style="width: 350px;margin-left:5px">
-                <optgroup label="Select a Form Below">
-                    <option id="selected" value="Scientific-Preparatory-Program-Course-Enrollment-Form-Form-BH.docx">
-                        Form BH
-                    </option>
-                    <option value="Thesis-Advisor-and-Topic-Appointment-Form-Form-TD-1.docx">Form TD</option>
-                    <option value="Course-Accreditation-Form-Form-DS.docx">From DS</option>
-                    <option value="Registration-form-for-Courses-from-Other-Institutions-Form-DA.docx">Form DA</option>
-                    <option value="Student-Leave-of-Absence-Form-Form-İ.docx">Form I</option>
-                    <option value="Jury-Report-of-PhD-Qualifying-Exam-Results-Form-DY.docx">Form DY</option>
-                    <option value="PhD-Qualifying-Exam-Decision-Form-for-Jury-Member-Attending-Exam-Online-DY-a.docx">
-                        Form DY-a
-                    </option>
-                    <option value="Thesis-Monitoring-Committee-Proposal-Form-Form-TİK-1.docx">Form TIK</option>
-                    <option value="Report-of-Thesis-Proposal-Defense-Exam-Results-Form-TO.docx">Form TO</option>
-                    <option value="Thesis-Proposal-Defense-Exam-Decision-Form-for-Committee-Member-Attending-Meeting-Online-Form-TÖ-a.docx">
-                        Form TO-a
-                    </option>
-                    <option value="Thesis-Monitoring-Committee-Meeting-Report-Form-Form-TİK-T.docx">TİK-T</option>
-                    <option value="Thesis-Monitoring-Committee-Member-Attending-Online-Meeting-Report-Form-Form-TİK-T-a-2.docx">
-                        TİK-T-a
-                    </option>
-                    <option value="Thesis-Defense-Jury-Appointment-Form-Form-TJ.docx">Form TJ</option>
-                    <option value="Education-Evaluation-Form-for-Master’s-Students-Defending-their-Thesis-Form-TJ-a.docx">
-                        Form TJ-a
-                    </option>
-                    <option value="Education-Evaluation-Form-for-PhD-Students-Defending-their-Thesis-Form-TJ-b.docx">
-                        Form TJ-b
-                    </option>
-                    <option value="Thesis-Defense-Exam-Jury-Report-Form-Form-TS.docx">Form TS</option>
-                    <option value="Scientific-Contribution-Jury-Opinion-Form-for-PhD-Students-Defending-their-Thesis-Form-TS-a.docx">
-                        Form TS-a
-                    </option>
-                    <option value="Thesis-Defense-Exam-Decision-Form-for-Jury-Attending-Online-Form-TS-b-1.docx">Form
-                        TS-b
-                    </option>
-                    <option value="Defense-Exam-Notification-Form-for-Students-Who-Have-Revised-Their-Thesis-Form-TJ-D.docx">
-                        Form TJ-d
-                    </option>
-                    <option value="Thesis-Final-Copy-Submission-Deadline-Extension-Form-Form-ES.docx">Form ES</option>
-                    <option value="Thesis-Final-Copy-Submission-Form-Form-TT.docx">Form TT</option>
-                    <option value="Graduation-Report-Form-for-Master’s-Programs-without-ThesisForm-TZM.docx">Form TZM
-                    </option>
-                    <option value="Jury-Invitation-Letter-Request-Form-Form-DM.docx">Form DM</option>
-                    <option value="Request-Form-for-Appointment-with-Travel-Expenses-and-Allowance-Form-GD.docx">Form
-                        GD
-                    </option>
-                </optgroup>
-            </select>
 
-            <a class="btn btn-danger d-inline download-file" style="margin-left: 15px;" href="">
-
-                Download Document <i class="fas fa-file-download downloadButton"></i></a>
-
-            <br>
             <div class="mt-4">
                 <form method="POST" enctype="multipart/form-data" action="/uploader">
-                    <p class="ml-3">Upload File</p>
+                    <select name="form-name" id="select-forms" class="form-control d-inline" style="width: 350px;margin-left:5px">
+                        <optgroup label="Select a Form Below">
+                            {% for form in data.form_list %}
+                                {% if form.form_type == 'Form BH' %}
+                                    <option id="selected"
+                                            value="Scientific-Preparatory-Program-Course-Enrollment-Form-Form-BH.docx">
+                                        Form BH
+                                    </option>
+                                {% else %}
+                                    <option value="{{ form.form_name }}">
+                                        {{ form.form_type }}
+                                    </option>
+                                {% endif %}
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+
+                    <a class="btn btn-danger d-inline download-file" style="margin-left: 15px;" href="">
+                        Download Document <i class="fas fa-file-download downloadButton"></i></a>
+                    <br>
+                    <p class="ml-3 mt-3">Upload File</p>
                     <div class="form-group">
 
-                        <input type="file" class="ml-3" name="file">
-
-                        <button class="btn btn-primary submitButton btn-danger" type="submit">
+                        <input type="file" class="ml-3 uploadFile" name="file">
+                        <p href="#" class="fileName d-inline ml-3 mr-5"></p>
+                        <button {{ data.submit_status }} class="btn btn-primary submitButton btn-danger" type="submit">
                             Submit
                         </button>
-                        <button class="btn btn-primary submitButton btn-danger" disabled type="button">Delete
-                        </button>
+                        <a href="#" class="btn btn-primary btn-danger deleteButton" type="button">
+                            Delete
+                        </a>
 
-                                    <button disabled class="btn btn-danger d-inline download-file"  href="#">
-
-                Download Document <i class="fas fa-file-download downloadButton"></i></button>
+                        <a id="download-uploaded-file" disabled class="btn btn-danger d-inline showButton" href="">
+                            Download Uploaded File <i class="fas fa-file-download downloadButton"></i></a>
                     </div>
 
                 </form>
@@ -105,6 +71,7 @@
 
 
         </div>
+
 
     </div>
 {% endblock %}
