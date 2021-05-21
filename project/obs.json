@@ -1,4 +1,9 @@
 {
+  "general" : {
+    "semester" : "2020-2021 Spring",
+  }
+
+  ,
   "gorkemgiray@iyte.edu.tr": {
     "name" : "Görkem Giray",
     "email": "gorkemgiray@iyte.edu.tr",
@@ -10,61 +15,140 @@
     "name": "Onur Demirörs",
     "email": "onurdemirors@iyte.edu.tr",
     "type": "Advisor",
-    "department": "Computer Engineering"
+    "department": "Computer Engineering",
+    "nationality": "Turkey"
   },
   "cemozan@std.iyte.edu.tr": {
     "name": "Cem Ozan",
     "email": "cemozan@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
-    "courses" : ["CENG555"],
-    "GPA": 3.12
-
+    "nationality": "Turkey",
+    "courses" : ["CENG423-Prof. Cem OZAN"],
+    "gpa": 3.12,
+    "department_advisor" : "Prof. Onur Demirörs",
+    "department_advisor_mail" : "onurdemirors@iyte.edu.tr",
+    "prerequisite" : {
+      "1" : false,
+      "2" : false,
+      "3" : false,
+      "4" : false,
+      "5" : false,
+      "6" : false,
+      "7" : false,
+      "8" : false
+    }
   },
   "dilekozturk@iyte.edu.tr": {
     "name": "Dilek Öztürk",
     "email": "dilekozturk@iyte.edu.tr",
     "type": "Advisor",
-    "department": "Computer Engineering"
+    "department": "Computer Engineering",
+    "nationality": "Turkey"
   },
   "mertavincan@std.iyte.edu.tr": {
     "name": "Mert Avıncan",
     "email": "mertavincan@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
+    "nationality": "Turkey",
     "courses" : ["CENG555"],
-    "GPA": 3.12
+    "gpa": 3.33,
+    "department_advisor" : "Prof. Onur Demirörs",
+    "department_advisor_mail" : "onurdemirors@iyte.edu.tr",
+    "prerequisite" : {
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    }
   },
   "erayokutay@std.iyte.edu.tr": {
     "name": "Eray Okutay",
     "email": "erayokutay@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
+    "nationality": "Turkey",
     "courses" : ["CENG555"],
-    "GPA": 3.12
+    "gpa": 3.12,
+    "department_advisor" : "Prof. Onur Demirörs",
+    "department_advisor_mail" : "onurdemirors@iyte.edu.tr",
+    "prerequisite" : {
+      "1" : false,
+      "2" : false,
+      "3" : false,
+      "4" : false,
+      "5" : false,
+      "6" : false,
+      "7" : false,
+      "8" : false
+    }
   },
   "hamitcelik@std.iyte.edu.tr": {
     "name": "Hamit Mervan Çelik",
     "email": "hamitcelik@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
+    "nationality": "Turkey",
     "courses" : ["CENG555"],
-    "GPA": 3.12
+    "gpa": 3.12,
+    "department_advisor" : "Prof. Onur Demirörs",
+    "department_advisor_mail" : "onurdemirors@iyte.edu.tr",
+    "prerequisite" : {
+      "1" : false,
+      "2" : false,
+      "3" : false,
+      "4" : false,
+      "5" : false,
+      "6" : false,
+      "7" : false,
+      "8" : false
+    }
   },
   "osmanhicyilmaz@std.iyte.edu.tr": {
     "name": "Osman Anıl Hiçyılmaz",
     "email": "osmanhicyilmaz@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
+    "nationality": "Turkey",
     "courses" : ["CENG555"],
-    "GPA": 3.12
+    "gpa": 3.12,
+    "department_advisor" : "Dr. Görkem Giray",
+    "department_advisor_mail" : "gorkemgiray@iyte.edu.tr",
+    "prerequisite" : {
+      "1" : false,
+      "2" : false,
+      "3" : false,
+      "4" : false,
+      "5" : false,
+      "6" : false,
+      "7" : false,
+      "8" : false
+    }
   },
   "kemalduman@iyte.edu.tr": {
     "name" : "Kemal Duman",
     "email": "kemalduman@iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
+    "nationality": "Turkey",
     "courses" : ["CENG555"],
-    "GPA": 3.12
+    "gpa": 3.12,
+    "department_advisor" : "Dr. Görkem Giray",
+    "department_advisor_mail" : "gorkemgiray@iyte.edu.tr",
+    "prerequisite" : {
+      "1" : false,
+      "2" : false,
+      "3" : false,
+      "4" : false,
+      "5" : false,
+      "6" : false,
+      "7" : false,
+      "8" : false
+    }
   }
 }
