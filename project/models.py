@@ -82,3 +82,20 @@ class Proposal(UserMixin, db.Model):
         pytz.timezone('Europe/Istanbul')))
 
 
+class File(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    form_type = db.Column(db.String(1000))
+    form_name = db.Column(db.String(1000))
+    deadline = db.Column(db.DateTime)  # SORULACAK
+
+
+class Uploads(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    form_id = db.Column(db.Integer)
+    student_id = db.Column(db.Integer)
+    is_checked = db.Column(db.Boolean, default=False)
+    submission_date = db.Column(db.DateTime, default=datetime.datetime.utcnow().replace(tzinfo=pytz.utc).astimezone(
+        pytz.timezone('Europe/Istanbul')))
+    file_path = db.Column(db.String(2000))
+    file_name = db.Column(db.String(1000))
+    form_name = db.Column(db.String(2000))

@@ -3,7 +3,8 @@
     "name" : "Görkem Giray",
     "email": "gorkemgiray@iyte.edu.tr",
     "type": "Advisor",
-    "department": "Computer Engineering"
+    "department": "Computer Engineering",
+    "nationality": "Turkey"
   },
   "onurdemirors@iyte.edu.tr": {
     "name": "Onur Demirörs",

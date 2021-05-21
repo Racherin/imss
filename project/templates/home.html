@@ -326,9 +326,7 @@ font-size: 13px;
 </footer>
 </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
@@ -365,13 +363,70 @@ font-size: 13px;
 
 
 <script>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    $(document).ready(function (){
+         $.getJSON($SCRIPT_ROOT + '/checkform', {
+            formtype: $("#select-forms option:selected").text(),
+        }, function (data) {
+            if(data.status === true){
+                $('.submitButton').attr("disabled",true);
+                $('.deleteButton').removeClass("disabled");
+                $('.showButton').removeClass("disabled");
+                $('.uploadFile').addClass("d-none");
+                $('.fileName').text(data.formname);
+            }else if (data.status === false){
+                $('.submitButton').attr("disabled",false);
+                $('.deleteButton').addClass("disabled");
+                $('.showButton').addClass("disabled");
+                $('.uploadFile').removeClass("d-none");
+                $('.fileName').text(" ");
+            }
+            $('.deleteButton').attr("href","/delete_item/"+$("#select-forms option:selected").val());
+             var uploaded_doc = "downloadfile" + "/"+"{{ current_user.id }}" +"/"+ $("#select-forms option:selected").val();
+        $(".showButton").attr("href", uploaded_doc);
+
+        });
+
+
+    })
+
+
     var selected_doc = "/download/" + $("#selected").val();
+
+    var uploaded_doc = "downloadfile" + "/"+"{{ current_user.id }}" +"/"+ $("#select-forms option:selected").val();
     $(".download-file").attr("href", selected_doc);
     $("#select-forms").change(function () {
-            var selected_doc = "/download/" + $("#select-forms option:selected").val();
-            $(".download-file").attr("href", selected_doc);
-        })
+        var selected_doc = "/download/" + $("#select-forms option:selected").val();
+        var uploaded_doc = "downloadfile" + "/"+"{{ current_user.id }}" +"/"+ $("#select-forms option:selected").val();
+
+        $(".download-file").attr("href", selected_doc);
+        $(".showButton").attr("href", uploaded_doc);
+
+
+        $.getJSON($SCRIPT_ROOT + '/checkform', {
+            formtype: $("#select-forms option:selected").text(),
+        }, function (data) {
+            if(data.status === true){
+                $('.submitButton').attr("disabled",true);
+                $('.deleteButton').removeClass("disabled");
+                $('.showButton').removeClass("disabled");
+                $('.uploadFile').addClass("d-none");
+                $('.fileName').text(data.formname);
+                $('.deleteButton').attr("href","/delete_item/"+$("#select-forms option:selected").val())
+
+            }else if (data.status === false){
+                $('.submitButton').attr("disabled",false);
+                $('.deleteButton').addClass("disabled");
+                $('.showButton').addClass("disabled");
+                $('.uploadFile').removeClass("d-none");
+                $('.fileName').text(" ");
+
+            }
+        });
+        return false;
+    });
 </script>
+
 
 </body>
 

@@ -122,3 +122,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+project/__pycache__/files.cpython-39.pyc
+project/__pycache__/files.cpython-39.pyc
+project/.DS_Store
+project/.DS_Store
+project/.DS_Store
