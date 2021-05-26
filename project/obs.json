@@ -171,12 +171,12 @@
     "prerequisite": {
       "1": false,
       "2": false,
-      "3": false,
+      "3": true,
       "4": false,
       "5": false,
       "6": false,
-      "7": false,
-      "8": false
+      "7": true,
+      "8": true
     },
     "photo" : "https://i.hizliresim.com/840k0cn.jpg"
   },
@@ -286,11 +286,11 @@
     "department_advisor": "Prof. Onur Demirörs",
     "department_advisor_mail": "onurdemirors@iyte.edu.tr",
     "prerequisite": {
-      "1": false,
-      "2": false,
-      "3": false,
+      "1": true,
+      "2": true,
+      "3": true,
       "4": false,
-      "5": false,
+      "5": true,
       "6": false,
       "7": false,
       "8": false
@@ -372,19 +372,19 @@
     "prerequisite": {
       "1": false,
       "2": false,
-      "3": false,
+      "3": true,
       "4": false,
-      "5": false,
+      "5": true,
       "6": false,
-      "7": false,
-      "8": false
+      "7": true,
+      "8": true
     },
     "photo" : "https://i.hizliresim.com/ox25fey.jpg"
   },
   "hamitcelik@std.iyte.edu.tr": {
     "name": "Hamit Mervan Çelik",
     "email": "hamitcelik@std.iyte.edu.tr",
-    "type": "Student",
+    "type": "Advisor",
     "department": "Computer Engineering",
     "nationality": "Turkey",
     "current_semester": "semester2",
@@ -454,11 +454,11 @@
     "department_advisor": "Prof. Onur Demirörs",
     "department_advisor_mail": "onurdemirors@iyte.edu.tr",
     "prerequisite": {
-      "1": false,
-      "2": false,
+      "1": true,
+      "2": true,
       "3": false,
       "4": false,
-      "5": false,
+      "5": true,
       "6": false,
       "7": false,
       "8": false
@@ -468,7 +468,7 @@
   "osmanhicyilmaz@std.iyte.edu.tr": {
     "name": "Osman Anıl Hiçyılmaz",
     "email": "osmanhicyilmaz@std.iyte.edu.tr",
-    "type": "Student",
+    "type": "Advisor",
     "department": "Computer Engineering",
     "nationality": "Turkey",
     "current_semester": "semester4",
@@ -567,8 +567,8 @@
     "prerequisite": {
       "1": false,
       "2": false,
-      "3": false,
-      "4": false,
+      "3": true,
+      "4": true,
       "5": false,
       "6": false,
       "7": false,
@@ -677,13 +677,15 @@
     "department_advisor_mail": "gorkemgiray@iyte.edu.tr",
     "prerequisite": {
       "1": false,
-      "2": false,
+      "2": true,
       "3": false,
       "4": false,
-      "5": false,
+      "5": true,
       "6": false,
-      "7": false,
-      "8": false
-    }
+      "7": true,
+      "8": true
+    },
+    "photo" : "https://i.hizliresim.com/4g7552l.jpg"
+
   }
 }
