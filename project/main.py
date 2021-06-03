@@ -16,7 +16,12 @@ If @main.route() includes a methods=['POST'], that means we'll handle a post req
 instead of rendering a html.
 """
 
-
+@main.route('/')
+def index():
+    if current_user is None :
+        return redirect(url_for('auth.login'))
+    elif current_user :
+        return redirect(url_for('main.dashboard'))
 
 @main.route('/dashboard')
 @login_required

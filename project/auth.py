@@ -25,12 +25,7 @@ return value into an HTTP response to be displayed by an HTTP client, such as a 
 auth = Blueprint('auth', __name__)
 mail = Mail(app)
 
-@auth.route('/')
-def index():
-    if current_user is None :
-        return redirect(url_for('auth.login'))
-    elif current_user :
-        return redirect(url_for('main.dashboard'))
+
 
 @auth.route('/login')
 def login():
