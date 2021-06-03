@@ -5,36 +5,40 @@
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                <div class="alert alert-{{ category }}" role="alert">
-                    {{ message}}
-                </div>
+                    <div class="alert alert-{{ category }}" role="alert">
+                        {{ message }}
+                    </div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
     </div>
 
     <div class="container-fluid">
-        <div class="d-sm-flex justify-content-between align-items-center mb-4">
-            <h3 class="text-dark mb-0"><img class="border rounded-circle img-profile" src="avatars/avatar3.jpg" style="width: 160px;height: 160px;">&nbsp; <strong>Cem OZAN&nbsp;</strong></h3>
-            <div class="card text-white bg-info shadow" >
-                <div class="card-body">
-                    <p class="m-0">Mail</p>
-                    <a href="mailto:cemozan@iyte.edu.tr"><p class="text-white-50 small m-0">cemozan@iyte.edu.tr</p></a>
+        <div class="d-sm-flex justify-content-between align-items-center mb-4 px-4">
+            <h3 class="text-dark mb-0"><img class="border rounded-circle img-profile" src="{{ data.photo }}"
+                                            style="width: 160px;height: 160px;">&nbsp;
+                <strong>{{ data.student.first_name }}&nbsp;{{ data.student.last_name }}</strong></h3>
+
+
+            <div class="d-flex justify-content-start">
+                <div class="card text-white bg-info shadow">
+                    <div class="card-body">
+                        <p class="m-0">Mail</p>
+                        <a href="mailto:cemozan@iyte.edu.tr"><p
+                                class="text-white-50 small m-0">{{ data.student.email }}</p></a>
+                    </div>
                 </div>
-            </div>
-            <div class="card text-white bg-secondary shadow">
-                <div class="card-body">
-                    <p class="m-0">Telefon</p>
-                    <p class="text-white-50 small m-0">+90 555 555 55 55</p>
+
+                <div class="card text-white bg-primary shadow">
+                    <div class="card-body">
+                        <p class="m-0">GPA</p>
+                        <p class="text-white-50 small m-0">{{ data.gpa }}</p>
+                    </div>
                 </div>
+
             </div>
-            <div class="card text-white bg-primary shadow" >
-                <div class="card-body">
-                    <p class="m-0">GPA</p>
-                    <p class="text-white-50 small m-0">3.5</p>
-                </div>
-            </div>
-            
+
+
         </div>
         <div class="row">
             <div class="col-lg-6 mb-4">
@@ -43,136 +47,75 @@
                         <h6 class="text-primary font-weight-bold m-0">Courses that Student Take</h6>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0"><strong>CENG4XX-Prof. Cem OZAN</strong></h6>
+
+                        {% for course in data.courses %}
+                            <li class="list-group-item">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <h6 class="mb-0"><strong>{{ course.name }} - {{ course.lecturer }}</strong></h6>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0"><strong>CENG5XX-Prof. Eray OKUTAY</strong></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0"><strong>CENG6XX-Prof. Mert Anıl ÇELİK</strong></h6>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        {% endfor %}
+
                     </ul>
                 </div>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="text-primary font-weight-bold m-0">Prerequisities</h6>
+                <div class="card shadow">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="text-primary font-weight-bold m-0">Forms that are Filled by Student</h6>
+                        </div>
+                        <ul class="list-group list-group-flush">
+
+                            {% for form in data.forms %}
+                                <li class="list-group-item">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2 d-flex justify-content-between">
+                                            <h6 class="my-auto"><strong>{{ form.form_name }}</strong><br></h6>
+
+                                            <a href="" id="form{{ form.id }}" class="btn btn-primary btn-sm "><i
+                                                    class="fas fa-file-download"></i></a>
+                                            <script>
+
+                                                var link = "/downloadfile" + "/" + "{{ data.student.id }}" + "/" + "{{ form.form_name }}";
+
+                                                document.getElementById('form{{ form.id }}').setAttribute("href", link);
+                                            </script>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0" style="background: #abf2e4;color: rgb(30,30,31);"><strong>Grades of all courses of the student are greater than or equal to CC in the student’s transcript.</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0" style="background: #abf2e4;color: rgb(0,0,0);"><strong>Student completed ethics and seminar courses successfully.</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0" style="background: #abf2e4;color: rgb(0,0,0);"><strong>Total number of courses of the student are greater than or equal to 7 with the total credit that is greater than or equal to 21 in the student’s transcript.</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0" style="background: rgb(249,135,124);color: rgb(0,0,0);"><strong>Student completed all the courses successfully before the end of the 4thsemester.</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0" style="background: #abf2e4;color: rgb(0,0,0);"><strong>Total ECTS is greater than or equal to 120 in the student’s transcript.</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0" style="background: #abf2e4;color: rgb(0,0,0);"><strong>Number of 4XX courses are less than or equal to 2 in the student’s transcript.</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0" style="background: #abf2e4;color: rgb(0,0,0);"><strong>There are no two consecutive U grades or three non-consecutive U grades in the student’s transcript.</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0" style="background: rgb(249,135,124);color: rgb(0,0,0);"><strong>CGPA is greater than or equal to 3.00 in the student’s transcript.</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
+
             </div>
-            <div class="col">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="text-primary font-weight-bold m-0">Forms that are Filled by Student</h6>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0"><strong>Scientific Preparatory Program Course Enrollment Form (Form BH)</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0"><strong>Thesis Advisor and Topic Appointment Form (Form TD)</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0"><strong>Course Accreditation Form (Form DS)</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0"><strong>Registration Form for Courses from Other Institutions (Form DA)</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <h6 class="mb-0"><strong>Student Leave of Absence Form (Form I)</strong><br></h6>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+            <div class="col-6 card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="text-primary font-weight-bold">Prerequisities</h6>
                 </div>
+                <ul class="list-group list-group-flush">
+
+                    {% for prerequisite in data.prerequisites %}
+                        <li class="list-group-item">
+                            <div class="align-items-center no-gutters">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0 text-dark">
+                                        <strong>{{ prerequisite.name }}</strong><br></p>
+                                    {% if prerequisite.status == False %}
+                                        <i class="far fa-times-circle mx-2 text-danger my-auto"></i>
+                                    {% else %}
+                                        <i class="far fa-check-circle mx-2 text-success my-auto"></i>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+
+
+                </ul>
             </div>
         </div>
     </div>

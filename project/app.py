@@ -1,5 +1,5 @@
 from datetime import timedelta
-from flask import Flask
+from flask import Blueprint, render_template, request, redirect, url_for, flash, Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail, Message
@@ -15,14 +15,25 @@ It’s used to tell the instance where it’s located.
 """
 
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'media')
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__)
+
+
+@app.errorhandler(404)
+# inbuilt function which takes error as parameter
+def not_found(e):
+    # defining function
+    return render_template("404.html")
+
+
+
+
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = "/media/"
-
+#app.config['MAX_CONTENT_LENGTH'] = 1 * 1000 * 1000
 
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -36,8 +47,6 @@ mail = Mail(app)
 
 s = URLSafeTimedSerializer('Thisisasecret!')
 
-UPLOAD_FOLDER = '/media'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # init SQLAlchemy so we can use it later in our models
@@ -72,6 +81,10 @@ app.register_blueprint(main_blueprint)
 from files import files as files_blueprint
 
 app.register_blueprint(files_blueprint)
+
+from proposal import proposal as proposal_blueprint
+
+app.register_blueprint(proposal_blueprint)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support

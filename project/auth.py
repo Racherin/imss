@@ -1,14 +1,15 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
-from models import User, Department
-from flask_login import login_user, login_required, logout_user
+from models import User, Department, Proposal
+from flask_login import login_user, login_required, logout_user, current_user
 import re
 from obs import OBSWrapper
 from app import s, app
 from flask_mail import Message, Mail
 from itsdangerous import SignatureExpired
 import os
+from sqlalchemy import and_
 
 
 """
@@ -24,6 +25,12 @@ return value into an HTTP response to be displayed by an HTTP client, such as a 
 auth = Blueprint('auth', __name__)
 mail = Mail(app)
 
+@auth.route('/')
+def index():
+    if current_user is None :
+        return redirect(url_for('auth.login'))
+    elif current_user :
+        return redirect(url_for('main.dashboard'))
 
 @auth.route('/login')
 def login():
@@ -39,7 +46,7 @@ def login_post():
     user = None
 
     if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or not str(
-            email).endswith('std.iyte.edu.tr') or str(email).strip() == '':
+            email).endswith('iyte.edu.tr') or str(email).strip() == '':
         flash('Please make sure that you enter valid mail.', "danger")
         return redirect(url_for('auth.login'))  # if the user doesn't exist reload the page
 
@@ -92,7 +99,7 @@ def forgot_password_post():
 @auth.route('/resetpassword/<token>')
 def reset_password(token):
     try:
-        email = s.loads(token, salt='forgot-password', max_age=3600)
+        email = s.loads(token, salt='forgot-password', max_age=600)
     except SignatureExpired:
         flash("Activation token expired.", "danger")
         return redirect(url_for("auth.login"))
@@ -103,7 +110,6 @@ def reset_password(token):
     data = {
         "email": user.email,
     }
-    flash("You successfully changed your password", "success")
     return render_template("resetpassword.html", data=data)
 
 
@@ -112,6 +118,15 @@ def reset_password_post():
     email = request.form.get("email")
     new_password = request.form.get("password")
     new_password_check = request.form.get("password_check")
+
+
+    reg_notwork = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,12}$"
+    pat = re.compile(reg_notwork)
+    mat = re.search(pat, new_password)
+
+    if not mat:
+        flash("Your password cannot be this" "danger")
+        return redirect(url_for("auth.reset_password"))
 
     if not new_password == new_password_check:
         flash("Your new passwords do not match!", "danger")
@@ -142,7 +157,7 @@ def signup_post():
     mat = re.search(pat, password)
 
     if not mat:
-        flash("Your password cannot be " + password, "danger")
+        flash("Invalid password format!", "danger")
         return redirect(url_for("auth.signup"))
 
     if str(email).endswith('@') or '@' not in str(email) or not str(email).endswith('iyte.edu.tr') or str(
@@ -154,7 +169,11 @@ def signup_post():
         flash("Passwords do not match.", "danger")
         return redirect(url_for('auth.signup'))
 
-    new_user = OBSWrapper(email)
+    try :
+        new_user = OBSWrapper(email)
+    except KeyError :
+        flash("This email does not exists on the system.")
+        return redirect(url_for("auth.signup"))
 
     if new_user.response == "error":
         flash("This user does not exists.", "danger")
@@ -218,7 +237,7 @@ def signup_post():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('auth.index'))
 
 
 @app.route('/confirm_email/<token>')
@@ -237,4 +256,57 @@ def confirm_email(token):
     db.session.commit()
     flash("Activation succesfull !", "success")
     return redirect(url_for("auth.login"))
+
+
+@auth.route('/updatepassword')
+def update_password():
+    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                               Proposal.is_accepted == "0")).all()
+    proposal_count = len(get_proposals)
+    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                               Proposal.is_accepted == "1")).all()
+    data = {
+        'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
+        'usertype': str(current_user.type_user).title(),
+        'all_proposals': get_proposals,
+        'proposal_count': proposal_count,
+        'user_photo': OBSWrapper(current_user.email).get_photo(),
+
+    }
+
+    return render_template("updatepassword.html", data=data)
+
+
+@auth.route("/updatepassword", methods=['POST'])
+def update_password_post():
+    current_password = request.form.get("current_password")
+    new_password = request.form.get("new_password")
+    new_password_again = request.form.get("new_password2")
+
+    reg_notwork = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,12}$"
+    pat = re.compile(reg_notwork)
+    mat = re.search(pat, new_password)
+
+    if not mat:
+        flash("Your password cannot be this" "danger")
+        return redirect(url_for("main.update_password"))
+
+    if not new_password == new_password_again:
+        flash("Passwords are not match.", "danger")
+        return redirect(url_for("main.update_password"))
+
+    user = User.query.filter_by(
+        email=current_user.email).first()
+
+    if not check_password_hash(user.password, current_password):
+        flash("Please enter correct password", "danger")
+        return redirect(url_for("main.update_password"))
+
+    user.password = generate_password_hash(new_password)
+
+    db.session.commit()
+
+    flash("Password change successfull", "success")
+    return redirect(url_for("main.update_password"))
+
 

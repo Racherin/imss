@@ -1,96 +1,67 @@
 {% extends 'home.html' %}
 
-
 {% block content %}
-    <div id="content">
-        <div class="container-fluid">
-            <h3 class="text-dark mb-1">Students</h3>
-        </div>
-        <h3 class="text-dark mb-4"></h3>
-        <div class="container-fluid">
-            <h3 class="text-dark mb-4"></h3>
-            <div class="card shadow">
-                <div class="card-header py-3"
-                     style="color: rgb(154,18,32);padding: 22px;padding-top: 41px;padding-bottom: 33px;height: 59px;">
-                    <p style="font-size: 20px;font-weight: normal;font-family: Roboto, sans-serif;">Students</p>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 text-nowrap">
-                            <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input
-                                    type="search" class="form-control form-control-sm" aria-controls="dataTable"
-                                    placeholder="Search"></label></div>
-                        </div>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">
+                        {{ message }}
                     </div>
-                    <div class="table-responsive table mt-2" id="dataTable" role="grid"
-                         aria-describedby="dataTable_info" style="font-family: Roboto, sans-serif;">
-                        <table class="table my-0" id="dataTable">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Thesis Topic</th>
-
-                                <th>Student Information</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for proposal in data.all_proposals %}
-                                <tr>
-                                    <td><img class="rounded-circle mr-2" width="30" height="30"
-                                             src="{{ url_for('static', filename='img/avatar5.jpg') }}">
-
-                                        {{ proposal.student_name }}
-                                    </td>
-                                    <td>Computer Engineering</td>
-                                    <td data-toggle="tooltip" data-placement="right"
-                                        title="{{ proposal.thesis_topic }}">{{ proposal.thesis_topic | truncate(50,true,'...') }}</td>
-                                    <td>
-                                        <button href="#" type="button" class="btn btn-danger cpbutton">Student Information</button>
-                                    </td>
-                                </tr>
-
-                            {% endfor %}
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td><strong>Name</strong></td>
-                                <td><strong>Department</strong></td>
-                                <td>Thesis Topic</td>
-                                <td></td>
-                                <td><strong></strong></td>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 align-self-center">
-                            <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                <ul class="pagination">
-                                    <li class="page-item disabled"><a class="page-link" href="#"
-                                                                      aria-label="Previous"><span
-                                            aria-hidden="true">«</span></a></li>
-                                    <li class="page-item" id="active"><a class="page-link active" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
-                                            aria-hidden="true">»</span></a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </div>
+
+<div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-8 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="text-primary font-weight-bold m-0">Student List</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+
+
+
+                  {% for student in data.student_list %}
+                   <li class="list-group-item">
+                  <div class="row align-items-center no-gutters">
+                    <div class="col mr-2">
+
+                        <a href="{{ url_for('main.display_student',id=student.id) }}" class="text-dark">
+
+
+                      <h6 class="mb-0"><strong>{{ student.first_name }} {{ student.last_name }}</strong></h6><span class="text-xs">{{ student.email}}</span>
+                             </a>
+                    </div>
+
+                  </div>
+                </li>
+                  {% endfor %}
+
+
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 {% endblock %}
+

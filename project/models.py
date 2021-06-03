@@ -19,15 +19,20 @@ class User(db.Model, UserMixin):
     nationality = db.Column(db.String(20))
     last_login = db.Column(db.DateTime, default=datetime.datetime.utcnow().replace(tzinfo=pytz.utc).astimezone(
         pytz.timezone('Europe/Istanbul')))
-    specialization = db.Column(db.String(200))
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     type_user = db.Column(db.String(200))
+
+    #Advisor
+    specialization = db.Column(db.String(200))
     waiting_student_requests = db.Column(db.String(3000))  # "['232323','3434343','323232']"
     avaliable_hours = db.Column(db.String(1000))  # "{'monday':'14.00-15.00','tuesday':....}"
+
+    #Student
     thesis_topic = db.Column(db.String(2000))
     thesis_file = db.Column(db.Boolean, default=False)
     advisor_id = db.Column(db.Integer)
     task_id = db.Column(db.Integer)
+
 
 
 """
@@ -99,3 +104,8 @@ class Uploads(UserMixin, db.Model):
     file_path = db.Column(db.String(2000))
     file_name = db.Column(db.String(1000))
     form_name = db.Column(db.String(2000))
+
+
+class Prerequisite(UserMixin, db.Model) :
+    id = db.Column(db.Integer, primary_key=True)
+    prerequisite_description = db.Column(db.String(4000))

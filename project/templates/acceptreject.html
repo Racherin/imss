@@ -59,21 +59,20 @@
                                         {{ proposal.student_name }}
                                     </td>
                                     <td>Computer Engineering</td>
-                                    <td data-toggle="tooltip" data-placement="right"
-                                        title="{{ proposal.thesis_topic }}">{{ proposal.thesis_topic | truncate(50,true,'...') }}</td>
+
                                     <td>
                                         <button onclick="openAcceptModal('{{ proposal.student_id }}','{{ proposal.proposal_id }}')"
                                                 class="btn btn-primary active" type="button"
-                                                style="background: rgb(154,18,32)">Accept
+                                                style="background: rgb(154,18,32);border-color:  rgb(154,18,32)">Accept
                                         </button>
                                         <button onclick="openRejectModal('{{ proposal.student_id }}','{{ proposal.proposal_id }}')"
                                                 class="btn btn-primary active" type="button"
-                                                style="background: rgb(154,18,32);margin-left: 5px;margin-right: 5px;">
+                                                style="background: rgb(154,18,32);margin-left: 5px;margin-right: 5px;border-color:  rgb(154,18,32)">
                                             Reject
                                         </button>
                                         <a href="mailto:{{ proposal.student_mail }}" class="btn btn-primary active"
                                            type="button"
-                                           style="background: rgb(154,18,32);">Contact Student
+                                           style="background: rgb(154,18,32);border-color:  rgb(154,18,32)">Contact Student
                                         </a>
                                     </td>
                                 </tr>

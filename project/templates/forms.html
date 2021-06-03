@@ -28,6 +28,8 @@
 
             <div class="mt-4">
                 <form method="POST" enctype="multipart/form-data" action="/uploader">
+                <div class="d-flex justify-content-start">
+                <div class="form-group d-inline">
                     <select name="form-name" id="select-forms" class="form-control d-inline" style="width: 350px;margin-left:5px">
                         <optgroup label="Select a Form Below">
                             {% for form in data.form_list %}
@@ -43,12 +45,17 @@
                                 {% endif %}
                             {% endfor %}
                         </optgroup>
-                    </select>
 
-                    <a class="btn btn-danger d-inline download-file" style="margin-left: 15px;" href="">
+                    </select>
+                <div id="emailHelp" class="form-text ml-3 mt-3" style="font-size: 16px">File size should be less than 5MB.</div>
+
+                </div>
+                <div>
+                    <a class="btn btn-danger download-file" style="margin-left: 15px;" href="">
                         Download Document <i class="fas fa-file-download downloadButton"></i></a>
+                </div>
+                </div>
                     <br>
-                    <p class="ml-3 mt-3">Upload File</p>
                     <div class="form-group">
 
                         <input type="file" class="ml-3 uploadFile" name="file">

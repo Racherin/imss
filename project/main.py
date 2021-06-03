@@ -1,13 +1,12 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app import db
 from flask_login import login_required, current_user
-from models import User, Proposal
+from models import User, Proposal, Uploads, Prerequisite
 from sqlalchemy import and_
 from werkzeug.security import generate_password_hash, check_password_hash
-
-
+from obs import OBSWrapper
+import re
 main = Blueprint('main', __name__)
-
 
 """
 This file includes some examples of how to handle HTTP requests about user pages and post requests from different users.
@@ -18,103 +17,81 @@ instead of rendering a html.
 """
 
 
-@main.route('/')
-def index():
-    return render_template("login2.html")
-
-
 
 @main.route('/dashboard')
 @login_required
 def dashboard():
-    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
-                                               Proposal.is_accepted == "0")).all()
-    proposal_count = len(get_proposals)
-    data = {
-        'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
-        'usertype': str(current_user.type_user).title(),
-        'proposal_count':proposal_count
-    }
-    return render_template("dashboard.html", data=data)
+    if current_user.type_user == "student":
+        obs_data = OBSWrapper(current_user.email)
+        gpa = obs_data.get_user_gpa()
+        course_list = obs_data.get_user_courses()
+        courses = []
+        for course in course_list:
+            courses.append("" + course['name'] + " - " + course['lecturer'])
+        department_advisor = obs_data.get_user_department_advisor()
+        department_advisor_mail = obs_data.get_user_department_advisor_mail()
+        department = obs_data.get_user_department()
+        general_data = OBSWrapper("general")
+        semester = general_data.get_semester()
+
+        get_student = User.query.filter(User.id == current_user.id).first()
+        thesis_advisor_name = ""
+        if get_student.advisor_id is None:
+            thesis_advisor_name = "You did not propose with any advisor yet."
+        else:
+            get_advisor_name = User.query.filter(User.id == get_student.advisor_id).first()
+            thesis_advisor_name = get_advisor_name.first_name + " " + get_advisor_name.last_name
+
+        get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                                   Proposal.is_accepted == "0")).all()
+        proposal_count = len(get_proposals)
+        data = {
+            'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
+            'usertype': str(current_user.type_user).title(),
+            'proposal_count': proposal_count,
+            'gpa': gpa,
+            'courses': courses,
+            'department_advisor': department_advisor,
+            'department_advisor_mail': department_advisor_mail,
+            'department': department,
+            'semester': semester,
+            'thesis_advisor': thesis_advisor_name,
+            'user_photo': OBSWrapper(current_user.email).get_photo(),
+
+        }
+        return render_template("dashboard.html", data=data)
+    else:
+
+        get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                                   Proposal.is_accepted == "0")).all()
+        proposal_count = len(get_proposals)
+
+        filelist = []
+        forms = Uploads.query.order_by(Uploads.id.desc()).limit(5).all()
+
+        for form in forms:
+            get_student = User.query.filter(User.id == form.student_id).first()
+            if get_student.advisor_id == current_user.id:
+                filelist.append({'file_name': form.form_name, 'submission_date': form.submission_date,'student_name':get_student.first_name + " "+get_student.last_name,'student_id':get_student.id})
 
 
-@main.route('/propose-advisor')
-@login_required
-def propose_advisor():
+        obs_data = OBSWrapper("general")
+        obs_data_advisor = OBSWrapper(current_user.email)
 
-    all_advisors = User.query.filter(User.type_user == 'advisor').all()
-    get_student = User.query.filter(User.id == current_user.id).first()
-    print(get_student.advisor_id,"asdadasdasda")
-    if get_student.advisor_id is not None :
-        get_accepted_advisor = User.query.filter(User.id == get_student.advisor_id).first()
-        flash("Your proposal is already accepted by "+ get_accepted_advisor.first_name+" "+get_accepted_advisor.last_name,"success")
-        return redirect(url_for('main.dashboard'))
+        get_student_list = len(User.query.filter(User.advisor_id == current_user.id).all())
 
-    data = {
-        'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
-        'usertype': str(current_user.type_user).title(),
-        'all_advisors': all_advisors,
+        data = {
+            'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
+            'usertype': str(current_user.type_user).title(),
+            'proposal_count': proposal_count,
+            'user_photo': OBSWrapper(current_user.email).get_photo(),
+            'formlist': filelist,
+            'semester' : obs_data.get_semester(),
+            'department' : obs_data_advisor.get_user_department(),
+            'student_count' : get_student_list
 
-    }
-    return render_template("proposeadvisor.html", data=data)
-
-
-@main.route('/createproposal', methods=['POST'])
-def acceptpropsal():
-    advisorid = request.form.get('advisorid')
-    studentid = current_user.id
-    email = current_user.email
-    student_name = str(current_user.first_name + " " + current_user.last_name)
-    thesis_topic = request.form.get('thesistopic')
-    new_proposal = Proposal(student_id=studentid, advisor_id=advisorid, thesis_topic=thesis_topic,
-                            student_name=student_name,student_mail=email)
-    db.session.add(new_proposal)
-    db.session.commit()
-    flash("You have successfully proposed to advisor.","success")
-    return redirect(url_for('main.dashboard'))
-
-
-@main.route('/my-proposals')
-@login_required
-def my_proposals():
-    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
-                                               Proposal.is_accepted == "0")).all()
-    proposal_count = len(get_proposals)
-
-    data = {
-        'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
-        'usertype': str(current_user.type_user).title(),
-        'all_proposals': get_proposals,
-        'proposal_count': proposal_count
-
-    }
-    return render_template("acceptreject.html", data=data)
-
-
-@main.route('/proposal-answer-accept', methods=['POST'])
-def answer_proposal_accept():
-    std_id = request.form.get('student_id')
-    prop_id = request.form.get('proposal_id')
-    my_proposal = Proposal.query.filter(Proposal.proposal_id == prop_id).first()
-    my_proposal.is_accepted = "1"
-    my_student = User.query.filter(User.id == std_id).first()
-    my_student.advisor_id = current_user.id
-    flash("You have successfully accepted student's proposal.","success")
-    db.session.commit()
-    return redirect(url_for('main.my_proposals'))
-
-
-@main.route('/proposal-answer-reject', methods=['POST'])
-def answer_proposal_reject():
-    prop_id = request.form.get('proposal_id')
-    print(prop_id)
-    my_proposal = Proposal.query.filter(Proposal.proposal_id == prop_id).first()
-    my_proposal.is_accepted = "2"
-    flash("You have successfully rejected student's proposal.","danger")
-    db.session.commit()
-    return redirect(url_for('main.my_proposals'))
-
-
+        }
+        return render_template("dashboardadvisor.html", data=data)
 
 
 @main.route('/list-student')
@@ -130,50 +107,85 @@ def list_students():
         'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
         'usertype': str(current_user.type_user).title(),
         'all_proposals': get_proposals,
-        'proposal_count': proposal_count
+        'proposal_count': proposal_count,
+        'user_photo': OBSWrapper(current_user.email).get_photo(),
 
     }
     return render_template("displaystudent.html", data=data)
 
-@main.route('/updatepassword')
-def update_password():
+
+@login_required
+@main.route('/studentlist')
+def students():
     get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
                                                Proposal.is_accepted == "0")).all()
     proposal_count = len(get_proposals)
     get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
                                                Proposal.is_accepted == "1")).all()
+
+    student_list = User.query.filter(User.advisor_id == current_user.id).all()
+
     data = {
         'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
         'usertype': str(current_user.type_user).title(),
         'all_proposals': get_proposals,
-        'proposal_count': proposal_count
+        'proposal_count': proposal_count,
+        'student_list': student_list,
+        'user_photo': OBSWrapper(current_user.email).get_photo(),
 
     }
+    return render_template("liststudents.html", data=data)
 
-    return render_template("updatepassword.html",data=data)
 
-@main.route("/updatepassword",methods=['POST'])
-def update_password_post():
-    current_password = request.form.get("current_password")
-    new_password = request.form.get("new_password")
-    new_password_again = request.form.get("new_password2")
+@login_required
+@main.route('/student/<id>')
+def display_student(id):
+    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                               Proposal.is_accepted == "0")).all()
+    proposal_count = len(get_proposals)
+    get_proposals = Proposal.query.filter(and_(Proposal.advisor_id == current_user.id,
+                                               Proposal.is_accepted == "1")).all()
 
-    if not new_password == new_password_again :
-        flash("Passwords are not match.","danger")
-        return redirect(url_for("main.update_password"))
+    get_student = User.query.filter(User.id == int(id)).first()
 
-    user = User.query.filter_by(
-        email=current_user.email).first()
+    student_obs = OBSWrapper(get_student.email)
 
-    if not check_password_hash(user.password, current_password) :
-        flash("Please enter correct password","danger")
-        return redirect(url_for("main.update_password"))
+    courses = student_obs.get_user_courses()
 
-    user.password = generate_password_hash(new_password)
 
-    db.session.commit()
+    gpa = student_obs.get_user_gpa()
+    form_list = Uploads.query.filter(Uploads.student_id == get_student.id).all()
+    photo = student_obs.get_photo()
 
-    flash("Password change successfull","success")
-    return redirect(url_for("main.update_password"))
+    prerequisities = Prerequisite.query.filter().all()
+    student_prereq = student_obs.get_user_prerequisites()
+
+    print(student_prereq)
+    prerequisite_list = []
+    for prereq in prerequisities:
+        prerequisite_list.append(
+            {
+                "name" : prereq.prerequisite_description,
+                "status" : student_obs.get_user_prerequisites()[str(prereq.id)]
+            }
+        )
+
+
+    data = {
+        'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
+        'user_photo': OBSWrapper(current_user.email).get_photo(),
+        'usertype': str(current_user.type_user).title(),
+        'all_proposals': get_proposals,
+        'proposal_count': proposal_count,
+        'student': get_student,
+        'gpa': gpa,
+        'courses': courses,
+        'photo': photo,
+        'forms': form_list,
+        'prerequisites': prerequisite_list,
+
+    }
+    return render_template("displaystudent.html", data=data)
+
 
 

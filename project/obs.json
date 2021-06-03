@@ -1,70 +1,691 @@
 {
+  "general": {
+    "semester": "2020-2021 Spring"
+  },
+  "computer_engineering_curriculum": {
+    "technical_count": 7,
+    "total_credits": 21,
+    "total_ects": 120,
+    "semester1": {
+      "1": {
+        "lecture_name": "CENG518",
+        "ects": 7,
+        "credits": 0
+      },
+      "2": {
+        "name": "ELT1",
+        "ects": 9,
+        "credits": 3
+      },
+      "3": {
+        "name": "ELT2",
+        "ects": 9,
+        "credits": 3
+      },
+      "4": {
+        "name": "ELT3",
+        "ects": 9,
+        "credits": 3
+      }
+    },
+    "semester2": {
+      "1": {
+        "lecture_name": "CENG590",
+        "ects": 7,
+        "credits": 0
+      },
+      "2": {
+        "name": "ELT4",
+        "ects": 9,
+        "credits": 3
+      },
+      "3": {
+        "name": "ELT5",
+        "ects": 9,
+        "credits": 3
+      },
+      "4": {
+        "name": "ELT6",
+        "ects": 9,
+        "credits": 3
+      },
+      "5": {
+        "name": "ELT7",
+        "ects": 9,
+        "credits": 3
+      }
+    },
+    "semester3": {
+      "1": {
+        "lecture_name": "CENG8xx",
+        "ects": 40,
+        "credits": 0
+      },
+      "2": {
+        "name": "CENG500",
+        "ects": 26,
+        "credits": 0
+      }
+    },
+    "semester4": {
+      "1": {
+        "lecture_name": "CENG8xx",
+        "ects": 40,
+        "credits": 0
+      },
+      "2": {
+        "name": "CENG500",
+        "ects": 26,
+        "credits": 0
+      }
+    }
+  },
   "gorkemgiray@iyte.edu.tr": {
-    "name" : "Görkem Giray",
+    "name": "Görkem Giray",
     "email": "gorkemgiray@iyte.edu.tr",
     "type": "Advisor",
     "department": "Computer Engineering",
-    "nationality": "Turkey"
+    "nationality": "Turkey",
+    "photo": "https://ceng.iyte.edu.tr/wp-content/uploads/sites/124/2021/02/fa_gorkem_giray-1.jpg"
   },
   "onurdemirors@iyte.edu.tr": {
     "name": "Onur Demirörs",
     "email": "onurdemirors@iyte.edu.tr",
     "type": "Advisor",
-    "department": "Computer Engineering"
+    "department": "Computer Engineering",
+    "nationality": "Turkey",
+    "photo": "https://ceng.iyte.edu.tr/wp-content/uploads/sites/124/2017/09/onur_demirors.png"
   },
   "cemozan@std.iyte.edu.tr": {
     "name": "Cem Ozan",
     "email": "cemozan@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
-    "courses" : ["CENG555"],
-    "GPA": 3.12
-
+    "nationality": "Turkey",
+    "current_semester": "semester2",
+    "courses": {
+      "semester1": [
+        {
+          "name": "CENG518",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG501",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG502",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG503",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester2": [
+        {
+          "name": "CENG590",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        },
+        {
+          "name": "CENG504",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG505",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG506",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG507",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        }
+      ],
+      "semester3": [],
+      "semester4": []
+    },
+    "gpa": 3.12,
+    "department_advisor": "Prof. Onur Demirörs",
+    "department_advisor_mail": "onurdemirors@iyte.edu.tr",
+    "prerequisite": {
+      "1": false,
+      "2": false,
+      "3": true,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": true,
+      "8": true
+    },
+    "photo" : "https://i.hizliresim.com/840k0cn.jpg"
   },
   "dilekozturk@iyte.edu.tr": {
     "name": "Dilek Öztürk",
     "email": "dilekozturk@iyte.edu.tr",
     "type": "Advisor",
-    "department": "Computer Engineering"
+    "department": "Computer Engineering",
+    "nationality": "Turkey"
   },
   "mertavincan@std.iyte.edu.tr": {
     "name": "Mert Avıncan",
     "email": "mertavincan@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
-    "courses" : ["CENG555"],
-    "GPA": 3.12
+    "nationality": "Turkey",
+    "current_semester": "semester4",
+    "courses": {
+      "semester1": [
+        {
+          "name": "CENG518",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG501",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG502",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG503",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester2": [
+        {
+          "name": "CENG590",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG504",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG505",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG506",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG507",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester3": [
+        {
+          "name": "CENG801",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG500",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": false
+        }
+      ],
+      "semester4": [
+        {
+          "name": "CENG801",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        },
+        {
+          "name": "CENG500",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        }
+      ]
+    },
+    "gpa": 3.33,
+    "department_advisor": "Prof. Onur Demirörs",
+    "department_advisor_mail": "onurdemirors@iyte.edu.tr",
+    "prerequisite": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": false,
+      "5": true,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "photo" : "https://i.hizliresim.com/8hfsjzz.jpg"
   },
   "erayokutay@std.iyte.edu.tr": {
     "name": "Eray Okutay",
     "email": "erayokutay@std.iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
-    "courses" : ["CENG555"],
-    "GPA": 3.12
+    "nationality": "Turkey",
+    "current_semester": "semester2",
+    "courses": {
+      "semester1": [
+        {
+          "name": "CENG518",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG501",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG502",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG503",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester2": [
+        {
+          "name": "CENG590",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        },
+        {
+          "name": "CENG504",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG505",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG506",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG507",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        }
+      ],
+      "semester3": [],
+      "semester4": []
+    },
+    "gpa": 3.12,
+    "department_advisor": "Prof. Onur Demirörs",
+    "department_advisor_mail": "onurdemirors@iyte.edu.tr",
+    "prerequisite": {
+      "1": false,
+      "2": false,
+      "3": true,
+      "4": false,
+      "5": true,
+      "6": false,
+      "7": true,
+      "8": true
+    },
+    "photo" : "https://i.hizliresim.com/ox25fey.jpg"
   },
   "hamitcelik@std.iyte.edu.tr": {
     "name": "Hamit Mervan Çelik",
     "email": "hamitcelik@std.iyte.edu.tr",
-    "type": "Student",
+    "type": "Advisor",
     "department": "Computer Engineering",
-    "courses" : ["CENG555"],
-    "GPA": 3.12
+    "nationality": "Turkey",
+    "current_semester": "semester2",
+    "courses": {
+      "semester1": [
+        {
+          "name": "CENG518",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG501",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG502",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG503",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester2": [
+        {
+          "name": "CENG590",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        },
+        {
+          "name": "CENG504",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG505",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG506",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        },
+        {
+          "name": "CENG507",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": true
+        }
+      ],
+      "semester3": [],
+      "semester4": []
+    },
+    "gpa": 3.12,
+    "department_advisor": "Prof. Onur Demirörs",
+    "department_advisor_mail": "onurdemirors@iyte.edu.tr",
+    "prerequisite": {
+      "1": true,
+      "2": true,
+      "3": false,
+      "4": false,
+      "5": true,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "photo" : "https://i.hizliresim.com/qj51zda.jpg"
   },
   "osmanhicyilmaz@std.iyte.edu.tr": {
     "name": "Osman Anıl Hiçyılmaz",
     "email": "osmanhicyilmaz@std.iyte.edu.tr",
-    "type": "Student",
+    "type": "Advisor",
     "department": "Computer Engineering",
-    "courses" : ["CENG555"],
-    "GPA": 3.12
+    "nationality": "Turkey",
+    "current_semester": "semester4",
+    "courses": {
+      "semester1": [
+        {
+          "name": "CENG518",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG501",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG502",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG503",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester2": [
+        {
+          "name": "CENG590",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG504",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG505",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG506",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG507",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester3": [
+        {
+          "name": "CENG801",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG500",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": false
+        }
+
+      ],
+      "semester4": [
+        {
+          "name": "CENG801",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        },
+        {
+          "name": "CENG500",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        }
+      ]
+    },
+    "gpa": 3.12,
+    "department_advisor": "Dr. Görkem Giray",
+    "department_advisor_mail": "gorkemgiray@iyte.edu.tr",
+    "prerequisite": {
+      "1": false,
+      "2": false,
+      "3": true,
+      "4": true,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "photo" : "https://i.hizliresim.com/4g7552l.jpg"
   },
   "kemalduman@iyte.edu.tr": {
-    "name" : "Kemal Duman",
+    "name": "Kemal Duman",
     "email": "kemalduman@iyte.edu.tr",
     "type": "Student",
     "department": "Computer Engineering",
-    "courses" : ["CENG555"],
-    "GPA": 3.12
+    "nationality": "Turkey",
+    "current_semester": "semester4",
+    "courses": {
+      "semester1": [
+        {
+          "name": "CENG518",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG501",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG502",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG503",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester2": [
+        {
+          "name": "CENG590",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG504",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG505",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG506",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        },
+        {
+          "name": "CENG507",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": true
+        }
+      ],
+      "semester3": [
+        {
+          "name": "CENG801",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "CC",
+          "elt": false
+        },
+        {
+          "name": "CENG500",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "AA",
+          "elt": false
+        }
+
+      ],
+      "semester4": [
+        {
+          "name": "CENG801",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        },
+        {
+          "name": "CENG500",
+          "lecturer": "Anıl Hiçyılmaz",
+          "grade": "-",
+          "elt": false
+        }
+      ]
+      },
+    "gpa": 3.12,
+    "department_advisor": "Dr. Görkem Giray",
+    "department_advisor_mail": "gorkemgiray@iyte.edu.tr",
+    "prerequisite": {
+      "1": false,
+      "2": true,
+      "3": false,
+      "4": false,
+      "5": true,
+      "6": false,
+      "7": true,
+      "8": true
+    },
+    "photo" : "https://i.hizliresim.com/4g7552l.jpg"
+
   }
 }

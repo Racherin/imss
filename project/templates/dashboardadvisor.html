@@ -13,7 +13,93 @@
         {% endwith %}
     </div>
 
-    <h1>Hello Worlefefefd</h1>
+    <div class="container-fluid">
+        <div class="d-sm-flex justify-content-between align-items-center mb-4">
+          <h3 class="text-dark mb-0">Dashboard</h3>
+        </div>
+        <div class="row">
+          <div class="col-lg-5 col-xl-4">
+            <div class="card shadow mb-4"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="text-primary font-weight-bold m-0">Last Submitted Files</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+
+
+
+                  {% for form in data.formlist %}
+                   <li class="list-group-item">
+                  <div class="row align-items-center no-gutters">
+                    <div class="col mr-2">
+                        <h6 class="mb-0"><strong>{{ form.file_name }}</strong></h6><span class="text-xs"><a class="text-dark" href="/student/{{ form.student_id }}">{{ form.student_name }}</a> - {{ form.submission_date.strftime('%Y-%m-%d') }}</span>
+                    </div>
+                  </div>
+                </li>
+                  {% endfor %}
+
+
+
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+
+
+              <div class="col-lg-6 mb-4">
+                <div class="card text-white bg-primary shadow background-op">
+                  <div class="card-body">
+                    <p class="m-0">Waiting Proposals</p>
+                    <p class="text-white-50 small m-0">{{ data.proposal_count }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 mb-4">
+                <div class="card text-white bg-success background-op ">
+                  <div class="card-body">
+                    <p class="m-0">Current Semester</p>
+                    <p class="text-white-50 small m-0">{{ data.semester }}<br></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 mb-4">
+                <div class="card text-white bg-info background-op">
+                  <div class="card-body">
+                    <p class="m-0">Total Students</p>
+                    <p class="text-white-50 small m-0">{{ data.student_count }}<br></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 mb-4">
+                <div class="card text-white bg-warning background-op">
+                  <div class="card-body">
+                    <p class="m-0">Department</p>
+                    <p class="text-white-50 small m-0">{{ data.department }}<br></p>
+                  </div>
+                </div>
+              </div>
+
+                <!--
+              <div class="col-lg-6 mb-4">
+                <div class="card text-white bg-danger shadow background-op">
+                  <div class="card-body">
+                    <p class="m-0">BİLGİLENDİRME</p>
+                    <p class="text-white-50 small m-0 ">2020-2021 BAHAR DÖNEMİNDE ONAYLANMIŞ 3 DERSİNİZ MEVCUT</p>
+                  </div>
+                </div>
+              </div>
+                -->
+
+
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 

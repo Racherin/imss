@@ -137,11 +137,9 @@ font-size: 13px;
                         class="text-white">&nbsp; Dashboard</span></a></li>
                 {% if current_user.type_user == 'student' %}
                     <li class="nav-item"><a class="nav-link"
-                                            href="{{ url_for('main.propose_advisor') }}"><i
+                                            href="{{ url_for('proposal.propose_advisor') }}"><i
                             class="fas fa-user"></i><span>&nbsp; &nbsp;Advisors</span></a></li>
-                    <li class="nav-item"><a class="nav-link"
-                                            href="#"><i
-                            class="fas fa-user"></i><span>&nbsp; &nbsp;Courses</span></a></li>
+
                     <li class="nav-item"><a class="nav-link"
                                             href="{{ url_for('files.forms') }}"><i
                             class="fas fa-user"></i><span>&nbsp; &nbsp;Forms/Documents</span></a></li>
@@ -153,12 +151,12 @@ font-size: 13px;
 
                 {% if current_user.type_user == 'advisor' %}
                     <li class="nav-item"><a class="nav-link"
-                                            href="{{ url_for('main.my_proposals') }}"
+                                            href="{{ url_for('proposal.my_proposals') }}"
                                             style="margin-top: 0px;"><i class="fas fa-table"></i><span>&nbsp; Accept/Reject Proposal <span
                             class="badge badge-light p-1">{{ data.proposal_count }}</span></span></a>
                     </li>
                     <li class="nav-item"><a class="nav-link"
-                                            href="{{ url_for('main.list_students') }}"
+                                            href="{{ url_for('main.students') }}"
                                             style="margin-top: 0px;"><i class="fas fa-user-graduate"></i><span>&nbsp; Students</span></a>
                     </li>
                 {% endif %}
@@ -237,7 +235,7 @@ font-size: 13px;
                                                                        href="#"><span
                                     class="d-none d-lg-inline mr-2 text-gray-600 small">{{ data.name }} <br> {{ data.usertype }}</br></span><img
                                     class="border rounded-circle img-profile"
-                                    src="{{ url_for('static', filename='img/avatar3.jpg') }}"></a>
+                                    src="{{ data.user_photo }}"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a
                                         class="dropdown-item" href="{{ url_for("main.update_password") }}"><i
                                         class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Update Password</a>
@@ -368,18 +366,25 @@ font-size: 13px;
          $.getJSON($SCRIPT_ROOT + '/checkform', {
             formtype: $("#select-forms option:selected").text(),
         }, function (data) {
-            if(data.status === true){
+            if(data.status === 'true'){
                 $('.submitButton').attr("disabled",true);
                 $('.deleteButton').removeClass("disabled");
                 $('.showButton').removeClass("disabled");
                 $('.uploadFile').addClass("d-none");
                 $('.fileName').text(data.formname);
-            }else if (data.status === false){
+            }else if (data.status === 'false'){
                 $('.submitButton').attr("disabled",false);
                 $('.deleteButton').addClass("disabled");
                 $('.showButton').addClass("disabled");
                 $('.uploadFile').removeClass("d-none");
                 $('.fileName').text(" ");
+            }else if (data.status === 'undefined'){
+                console.log("undefinedadsdasda");
+                $('.submitButton').attr("disabled",true);
+                $('.deleteButton').addClass("disabled");
+                $('.showButton').addClass("disabled");
+                $('.uploadFile').removeClass("d-none");
+                $('.fileName').text("");
             }
             $('.deleteButton').attr("href","/delete_item/"+$("#select-forms option:selected").val());
              var uploaded_doc = "downloadfile" + "/"+"{{ current_user.id }}" +"/"+ $("#select-forms option:selected").val();
@@ -406,7 +411,7 @@ font-size: 13px;
         $.getJSON($SCRIPT_ROOT + '/checkform', {
             formtype: $("#select-forms option:selected").text(),
         }, function (data) {
-            if(data.status === true){
+            if(data.status === 'true'){
                 $('.submitButton').attr("disabled",true);
                 $('.deleteButton').removeClass("disabled");
                 $('.showButton').removeClass("disabled");
@@ -414,13 +419,19 @@ font-size: 13px;
                 $('.fileName').text(data.formname);
                 $('.deleteButton').attr("href","/delete_item/"+$("#select-forms option:selected").val())
 
-            }else if (data.status === false){
+            }else if (data.status === 'false'){
                 $('.submitButton').attr("disabled",false);
                 $('.deleteButton').addClass("disabled");
                 $('.showButton').addClass("disabled");
                 $('.uploadFile').removeClass("d-none");
                 $('.fileName').text(" ");
 
+            }else if (data.status === 'undefined'){
+                $('.submitButton').attr("disabled",true);
+                $('.deleteButton').addClass("disabled");
+                $('.showButton').addClass("disabled");
+                $('.uploadFile').removeClass("d-none");
+                $('.fileName').text(" ");
             }
         });
         return false;

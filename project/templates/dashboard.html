@@ -29,64 +29,69 @@
                 <h6 class="text-primary font-weight-bold m-0">Courses</h6>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">
+
+
+
+                  {% for course in data.courses %}
+                   <li class="list-group-item">
                   <div class="row align-items-center no-gutters">
                     <div class="col mr-2">
-                      <h6 class="mb-0"><strong>CENG4XX-Prof. Cem OZAN</strong></h6><span class="text-xs">10:30 AM</span>
+                      <h6 class="mb-0"><strong>{{ course     }}</strong></h6><span class="text-xs">10:30 AM</span>
                     </div>
                   </div>
                 </li>
-                <li class="list-group-item">
-                  <div class="row align-items-center no-gutters">
-                    <div class="col mr-2">
-                      <h6 class="mb-0"><strong>CENG5XX-Prof. Eray OKUTAY</strong></h6><span class="text-xs">11:30 AM</span>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="row align-items-center no-gutters">
-                    <div class="col mr-2">
-                      <h6 class="mb-0"><strong>CENG6XX-Prof. Mert Anıl ÇELİK</strong></h6><span class="text-xs">12:30 AM</span>
-                    </div>
-                  </div>
-                </li>
+                  {% endfor %}
+
+
+
               </ul>
             </div>
           </div>
           <div class="col">
             <div class="row">
+
+                 <div class="col-lg-12 mb-4">
+                <div class="card text-white bg-danger shadow background-op">
+                  <div class="card-body">
+                    <p class="m-0">Thesis Advisor</p>
+                    <p class="text-white-50 small m-0">{{ data.thesis_advisor }}</p>
+                  </div>
+                </div>
+              </div>
               <div class="col-lg-6 mb-4">
                 <div class="card text-white bg-primary shadow background-op">
                   <div class="card-body">
                     <p class="m-0">GPA</p>
-                    <p class="text-white-50 small m-0">3.50</p>
+                    <p class="text-white-50 small m-0">{{ data.gpa }}</p>
                   </div>
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
                 <div class="card text-white bg-success background-op ">
                   <div class="card-body">
-                    <p class="m-0">Aktif Dönem Bilgisi</p>
-                    <p class="text-white-50 small m-0">2020-2021 BAHAR<br></p>
+                    <p class="m-0">Current Semester</p>
+                    <p class="text-white-50 small m-0">{{ data.semester }}<br></p>
                   </div>
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
                 <div class="card text-white bg-info background-op">
                   <div class="card-body">
-                    <p class="m-0">Danışman Bilgileri</p>
-                    <p class="text-white-50 small m-0">#Prof. Cem OZAN<br>cemozan@std.iyte.edu.tr</p>
+                    <p class="m-0">Department Advisor</p>
+                    <p class="text-white-50 small m-0">{{ data.department_advisor }}<br></p>
                   </div>
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
                 <div class="card text-white bg-warning background-op">
                   <div class="card-body">
-                    <p class="m-0">Öğrenim Bilgisi</p>
-                    <p class="text-white-50 small m-0">MUHENDİSLİK FAK/ Bilgisayar Müh.<br></p>
+                    <p class="m-0">Department</p>
+                    <p class="text-white-50 small m-0">{{ data.department }}<br></p>
                   </div>
                 </div>
               </div>
+
+                <!--
               <div class="col-lg-6 mb-4">
                 <div class="card text-white bg-danger shadow background-op">
                   <div class="card-body">
@@ -95,6 +100,9 @@
                   </div>
                 </div>
               </div>
+                -->
+
+
             </div>
           </div>
         </div>
