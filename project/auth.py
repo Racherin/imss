@@ -36,7 +36,6 @@ def login():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-    usertype = request.form.get('usertype')
     remember = True if request.form.get('remember') else False
     user = None
 
@@ -232,7 +231,7 @@ def signup_post():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.index'))
+    return redirect(url_for('main.index'))
 
 
 @app.route('/confirm_email/<token>')
@@ -284,7 +283,7 @@ def update_password_post():
 
     if not mat:
         flash("Your password cannot be this" "danger")
-        return redirect(url_for("main.update_password"))
+        return redirect(url_for("auth.update_password"))
 
     if not new_password == new_password_again:
         flash("Passwords are not match.", "danger")
@@ -302,6 +301,6 @@ def update_password_post():
     db.session.commit()
 
     flash("Password change successfull", "success")
-    return redirect(url_for("main.update_password"))
+    return redirect(url_for("auth.update_password"))
 
 

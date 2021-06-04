@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app, send_file, jsonify
+from werkzeug.utils import secure_filename
+
 from app import ALLOWED_EXTENSIONS
 from models import Proposal, File, Uploads, User
 from flask_login import current_user, login_required
@@ -101,7 +103,6 @@ def downloadUploadedFile(file, stid):
     return send_file(path, as_attachment=True)
 
 
-
 @login_required
 @files.route('/uploader', methods=['GET', 'POST'])
 def upload_file():
@@ -110,6 +111,8 @@ def upload_file():
 
         blob = request.files['file'].read()
         size = len(blob)
+
+        print(size)
 
         if size > 5000000:
             flash("File size is exceeded!", "danger")
@@ -120,7 +123,8 @@ def upload_file():
 
         try:
             if uploaded_file and allowed_file(uploaded_file.filename):
-                uploaded_file.save(dst="media/" + str(current_user.id) + "/" + uploaded_file.filename)
+                print(size, "second size")
+                uploaded_file.save(dst="media/" + str(current_user.id) + "/" + secure_filename(uploaded_file.filename))
             else:
                 flash("Please upload supported file types. Only supported file type is PDF !", "danger")
                 return redirect(url_for('files.forms'))

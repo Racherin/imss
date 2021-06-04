@@ -6,6 +6,7 @@ from sqlalchemy import and_
 from obs import OBSWrapper
 from webmail import send_mail
 
+
 proposal = Blueprint('proposal', __name__)
 
 
@@ -14,15 +15,12 @@ proposal = Blueprint('proposal', __name__)
 def propose_advisor():
     all_advisors = User.query.filter(User.type_user == 'advisor').all()
     get_student = User.query.filter(User.id == current_user.id).first()
-    print(get_student.advisor_id, "asdadasdasda")
     if get_student.advisor_id is not None:
         get_accepted_advisor = User.query.filter(User.id == get_student.advisor_id).first()
         flash(
             "Your proposal is already accepted by " + get_accepted_advisor.first_name + " " + get_accepted_advisor.last_name,
             "success")
         return redirect(url_for('main.dashboard'))
-
-    
 
     data = {
         'name': str(current_user.first_name).title() + ' ' + str(current_user.last_name).title(),
@@ -35,7 +33,7 @@ def propose_advisor():
 
 
 @proposal.route('/createproposal', methods=['POST'])
-def acceptpropsal():
+def createproposal():
     advisorid = request.form.get('advisorid')
     studentid = current_user.id
     email = current_user.email
@@ -82,10 +80,9 @@ def answer_proposal_accept():
 
     get_advisor = User.query.filter(User.id == my_proposal.advisor_id).first()
 
-    message = "Your proposal accepted by", get_advisor.first_name, get_advisor.last_name
+    message = "Your proposal accepted by " + get_advisor.first_name+ " "+get_advisor.last_name
 
     send_mail(get_student.email, "Proposal request accepted.", message)
-
 
     return redirect(url_for('proposal.my_proposals'))
 
@@ -102,7 +99,7 @@ def answer_proposal_reject():
 
     get_advisor = User.query.filter(User.id == my_proposal.advisor_id).first()
 
-    message = "Your proposal declined by", get_advisor.first_name, get_advisor.second_name
+    message = "Your proposal declined by " + get_advisor.first_name + " " + get_advisor.last_name
 
     send_mail(get_student.email, "Proposal request declined.", message)
 

@@ -77,8 +77,7 @@
 
                         {% for advisor in data.all_advisors %}
                             <tr>
-                                <td><img class="rounded-circle mr-2" width="30" height="30"
-                                         src="{{ url_for('static', filename='img/avatar3.jpg') }}">{{ advisor.first_name }} {{ advisor.last_name }}
+                                <td>{{ advisor.first_name }} {{ advisor.last_name }}
                                 </td>
                                 <td>{{ advisor.specialization }}</td>
                                 <td>Computer Engineering</td>
@@ -87,7 +86,7 @@
 
                                     <button onclick="openModal('{{ advisor.first_name }} {{ advisor.last_name }}','{{ advisor.id }}')"
                                             class="btn btn-primary"
-                                            type="button" style="background: rgb(154,18,32);">Propose
+                                            type="button" style="background: rgb(154,18,32);border-color: rgb(154,18,32)">Propose
                                     </button>
                                 </td>
                             </tr>
@@ -145,7 +144,7 @@
                             <select name="advisorid" id="selectadvisor" class="form-control">
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="background: rgb(154,18,32);">Submit
+                        <button type="submit" class="btn btn-primary" style="background: rgb(154,18,32);border-color: rgb(154,18,32)">Submit
                         </button>
                     </form>
                 </div>

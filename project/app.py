@@ -15,7 +15,7 @@ It’s used to tell the instance where it’s located.
 """
 
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'media')
-ALLOWED_EXTENSIONS = {'pdf'}
+ALLOWED_EXTENSIONS = {'pdf','docx'}
 
 app = Flask(__name__)
 

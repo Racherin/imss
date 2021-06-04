@@ -74,10 +74,14 @@ def dashboard():
         filelist = []
         forms = Uploads.query.order_by(Uploads.id.desc()).limit(5).all()
 
-        for form in forms:
-            get_student = User.query.filter(User.id == form.student_id).first()
-            if get_student.advisor_id == current_user.id:
-                filelist.append({'file_name': form.form_name, 'submission_date': form.submission_date,'student_name':get_student.first_name + " "+get_student.last_name,'student_id':get_student.id})
+
+        print(forms)
+        if forms :
+            print("dlmflmsdklfmsdlkfljks")
+            for form in forms:
+                get_student = User.query.filter(User.id == form.student_id).first()
+                if get_student.advisor_id == current_user.id:
+                    filelist.append({'file_name': form.form_name, 'submission_date': form.submission_date,'student_name':get_student.first_name + " "+get_student.last_name,'student_id':get_student.id})
 
 
         obs_data = OBSWrapper("general")
